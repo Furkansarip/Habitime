@@ -14,6 +14,8 @@
 		74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27C12A83F90C00B24C7B /* Persistence.swift */; };
 		74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27C32A83F90C00B24C7B /* Habitime.xcdatamodeld */; };
 		74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27CB2A8425E500B24C7B /* AddTaskView.swift */; };
+		74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27CE2A85458900B24C7B /* ColorButton.swift */; };
+		74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D12A878CE700B24C7B /* CategoryButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		74CE27C12A83F90C00B24C7B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		74CE27C42A83F90C00B24C7B /* Habitime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Habitime.xcdatamodel; sourceTree = "<group>"; };
 		74CE27CB2A8425E500B24C7B /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		74CE27CE2A85458900B24C7B /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
+		74CE27D12A878CE700B24C7B /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,13 +61,14 @@
 		74CE27B72A83F90B00B24C7B /* Habitime */ = {
 			isa = PBXGroup;
 			children = (
+				74CE27D02A878B3600B24C7B /* Scene */,
+				74CE27CD2A85458000B24C7B /* Components */,
 				74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */,
 				74CE27BA2A83F90B00B24C7B /* ContentView.swift */,
 				74CE27BC2A83F90C00B24C7B /* Assets.xcassets */,
 				74CE27C12A83F90C00B24C7B /* Persistence.swift */,
 				74CE27C32A83F90C00B24C7B /* Habitime.xcdatamodeld */,
 				74CE27BE2A83F90C00B24C7B /* Preview Content */,
-				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
 			);
 			path = Habitime;
 			sourceTree = "<group>";
@@ -74,6 +79,23 @@
 				74CE27BF2A83F90C00B24C7B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		74CE27CD2A85458000B24C7B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				74CE27CE2A85458900B24C7B /* ColorButton.swift */,
+				74CE27D12A878CE700B24C7B /* CategoryButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		74CE27D02A878B3600B24C7B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +171,8 @@
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
 				74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */,
 				74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */,
+				74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */,
+				74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */,
 				74CE27BB2A83F90B00B24C7B /* ContentView.swift in Sources */,
 				74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */,
 			);
