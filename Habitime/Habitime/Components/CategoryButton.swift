@@ -9,10 +9,11 @@ import SwiftUI
 
 struct CategoryButton: View {
     @State var buttonTitle: String
+    @State var buttonColor: Color
     var body: some View {
         Text(buttonTitle)
             .frame(width: 100, height: 50)
-            .background(Color.gray.opacity(0.6))
+            .background(buttonColor)
             .cornerRadius(10)
             .foregroundColor(.white)
         
@@ -21,6 +22,6 @@ struct CategoryButton: View {
 
 struct CategoryButton_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryButton(buttonTitle: "Title")
+        CategoryButton(buttonTitle: "Title", buttonColor: .red)
     }
 }

@@ -16,8 +16,6 @@ struct ColorButton: View {
             .padding()
             .background(singleColor)
             .cornerRadius(8)
-            .border(.gray)
-            
     }
 }
 

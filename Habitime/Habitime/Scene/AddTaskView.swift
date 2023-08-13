@@ -13,78 +13,94 @@ struct AddTaskView: View {
     var secondColorSet: [Color] = [Color.purple, Color.secondary, Color.cyan, Color.black, Color.mint, Color.teal, Color.gray.opacity(0.4), Color.pink.opacity(0.7), Color.green.opacity(0.5)]
     var firstCategorySet: [String] = ["Aktivite", "Spor", "Besin"]
     var secondCategorySet: [String] = ["Sanat", "Para", "Çeşitli"]
-    var leadPadding: CGFloat = 22
+    var paddingValue: CGFloat = 22
+    @State private var changedColor: Color = Color.pink
+    @State private var selectedColor: Color? = nil
     var body: some View {
         
         NavigationStack {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    Text("Alışkanlık").padding(EdgeInsets(top: 8, leading: leadPadding, bottom: 0, trailing: 0))
+                    Text("Alışkanlık").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
                     TextField("Başlık Gir", text: $habitTitle)
                         .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                         .frame(height: 40)
                         .background(Color.gray.opacity(0.3).cornerRadius(10))
                         .font(.headline)
-                        .padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 22))
+                        .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
                 }//Alışkanlık
                 VStack(alignment: .leading) {
-                    Text("Açıklama").padding(EdgeInsets(top: 8, leading: leadPadding, bottom: 0, trailing: 16))
+                    Text("Açıklama").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 16))
                     
                     TextField("Açıklama Ekle", text: $habitTitle)
                         .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                         .frame(height: 40)
                         .background(Color.gray.opacity(0.3).cornerRadius(10))
                         .font(.headline)
-                        .padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 22))
+                        .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
                 }//Açıklama
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Hedef").padding(EdgeInsets(top: 8, leading: leadPadding, bottom: 0, trailing: 0))
+                        Text("Hedef").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
                         TextField("Hedef", text: $habitTitle)
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                             .frame(height: 40)
                             .background(Color.gray.opacity(0.2).cornerRadius(10))
                             .font(.headline)
-                            .padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: leadPadding))
+                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
                     }//Hedef
                     VStack(alignment: .leading) {
-                        Text("Hatırlatma").padding(EdgeInsets(top: 8, leading: leadPadding, bottom: 0, trailing: 0))
+                        Text("Hatırlatma").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
                         TextField("Hatırlatıcı", text: $habitTitle)
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                             .frame(height: 40)
                             .background(Color.gray.opacity(0.2).cornerRadius(10))
                             .font(.headline)
-                            .padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: leadPadding))
+                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
                     }
                 }// Hedef - Hatırlatma
                 VStack {
                     Text("Renk")
-                }.padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))
+                }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                 HStack {
                     
                     ForEach(firstColorSet, id: \.self) { color in
                         Button {
-                            debugPrint("hello")
+                            changedColor = color
+                            withAnimation(Animation.easeInOut) {
+                                selectedColor = color
+                            }
+                            debugPrint(color)
                         } label: {
-                            ColorButton(singleColor: color)
+                            ColorButton(singleColor: color).overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 4).padding(-4)
+                            )
                         }
                     }
-                }.padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))//First color
+                }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//First color
                 HStack {
                     ForEach(secondColorSet, id: \.self) { color in
                         Button {
-                            debugPrint("hello")
+                            changedColor = color
+                            withAnimation(Animation.easeInOut) {
+                                selectedColor = color
+                            }
+                            debugPrint(color)
                         } label: {
-                            ColorButton(singleColor: color)
+                            ColorButton(singleColor: color).overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 3).padding(-4)
+                            )
                         }
                     }
-                }.padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))//SEcond
+                }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//SEcond
                 HStack {
                     Spacer()
                     Button("Özel Renk") {
                         print("hello")
                     }.frame(width: 110)
-                        .background(Color.red)
+                        .background(changedColor)
                         .cornerRadius(10)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16))
                         .foregroundColor(.white)
@@ -93,7 +109,7 @@ struct AddTaskView: View {
                 } // Özel Renk
                 VStack(alignment: .leading) {
                     
-                    Text("Kategori").padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))
+                    Text("Kategori").padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                 }
                 VStack {
                     HStack {
@@ -101,37 +117,37 @@ struct AddTaskView: View {
                             Button {
                                 debugPrint("hello")
                             } label: {
-                                CategoryButton(buttonTitle: title)
+                                CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                             }
                             Spacer()
                         }
-                    }.padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))
+                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                     
                     HStack {
                         ForEach(secondCategorySet, id: \.self) { title in
                             Button {
                                 debugPrint("hello")
                             } label: {
-                                CategoryButton(buttonTitle: title)
+                                CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                             }
                             Spacer()
                         }
-                    }.padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))
+                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: paddingValue, trailing: 0))
                     VStack {
-                            Spacer()
-                            Button("Alışkanlık Ekle") {
-                                print("h")
-                            }
-                            .frame(width: 200, height: 50)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .padding(EdgeInsets(top: 0, leading: leadPadding, bottom: 0, trailing: 0))
-                            Spacer()
+                        
+                        Button("Alışkanlık Ekle") {
+                            print("h")
                         }
+                        .frame(width: 350, height: 50)
+                        .background(changedColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                        .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                        Spacer()
+                    }
                     
                 } // Kategoriler
-               
+                
             }
             
         }.toolbar {
