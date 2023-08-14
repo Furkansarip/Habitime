@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddTaskView: View {
     @State var habitTitle: String = ""
+    @State var goalText: String
+    @State private var isSheetPresented = false
     var firstColorSet: [Color] = [Color.red, Color.blue, Color.yellow, Color.pink, Color.indigo, Color.green, Color.gray, Color.orange, Color.brown]
     var secondColorSet: [Color] = [Color.purple, Color.secondary, Color.cyan, Color.black, Color.mint, Color.teal, Color.gray.opacity(0.4), Color.pink.opacity(0.7), Color.green.opacity(0.5)]
     var firstCategorySet: [String] = ["Aktivite", "Spor", "Besin"]
@@ -22,162 +25,162 @@ struct AddTaskView: View {
     var body: some View {
         
         NavigationStack {
-            VStack(alignment: .leading) {
+            ScrollView {
                 VStack(alignment: .leading) {
-                    Text("Alışkanlık").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                    TextField("Başlık Gir", text: $habitTitle)
-                        .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
-                        .frame(height: 40)
-                        .background(Color.gray.opacity(0.3).cornerRadius(10))
-                        .font(.headline)
-                        .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
-                }//Alışkanlık
-                VStack(alignment: .leading) {
-                    Text("Açıklama").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 16))
-                    
-                    TextField("Açıklama Ekle", text: $habitTitle)
-                        .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
-                        .frame(height: 40)
-                        .background(Color.gray.opacity(0.3).cornerRadius(10))
-                        .font(.headline)
-                        .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
-                }//Açıklama
-                HStack {
                     VStack(alignment: .leading) {
-                        Text("Hedef").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                        TextField("Hedef", text: $habitTitle)
+                        Text("Alışkanlık").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
+                        TextField("Başlık Gir", text: $habitTitle)
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                             .frame(height: 40)
-                            .background(Color.gray.opacity(0.2).cornerRadius(10))
+                            .background(Color.gray.opacity(0.3).cornerRadius(10))
                             .font(.headline)
-                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
-                    }//Hedef
+                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
+                            
+                    }//Alışkanlık
                     VStack(alignment: .leading) {
-                        Text("Hatırlatma").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                        TextField("Hatırlatıcı", text: .constant(options[selectedOption]))
+                        Text("Açıklama").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 16))
+                        
+                        TextField("Açıklama Ekle", text: $habitTitle)
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                             .frame(height: 40)
-                            .background(Color.gray.opacity(0.2).cornerRadius(10))
+                            .background(Color.gray.opacity(0.3).cornerRadius(10))
                             .font(.headline)
-                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
-                            .onTapGesture {
-                                isPickerVisible.toggle()
-                            }
-                        if isPickerVisible {
-                            Picker("", selection: $selectedOption) {
-                                ForEach(0..<options.count) { index in
-                                    Text(options[index]).tag(index)
+                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
+                    }//Açıklama
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Hedef").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
+                            CustomTextField(text: $goalText, isFirstResponder: false)
+                                .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
+                                .frame(height: 40)
+                                .background(Color.gray.opacity(0.2).cornerRadius(10))
+                                .font(.headline)
+                                .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                                .onTapGesture {
+                                    isSheetPresented = true
+                                    
+                                }.sheet(isPresented: $isSheetPresented) {
+                                    CustomPickerView(isSheetPresented: $isSheetPresented, goalText: $goalText).presentationDetents([.fraction(0.4)])
                                 }
-                            }
-                            .pickerStyle(.wheel)
-                            .frame(maxWidth: .infinity)
-                            .padding()
+                        }//Hedef
+                        VStack(alignment: .leading) {
+                            Text("Hatırlatma").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
+                            TextField("Hatırlatıcı", text: $habitTitle)
+                                .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
+                                .frame(height: 40)
+                                .background(Color.gray.opacity(0.2).cornerRadius(10))
+                                .font(.headline)
+                                .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                                .onTapGesture {
+                                    isPickerVisible.toggle()
+                                }
+                            
                         }
-                        
-                    }
-                }// Hedef - Hatırlatma
-                VStack {
-                    Text("Renk")
-                }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
-                HStack {
-                    
-                    ForEach(firstColorSet, id: \.self) { color in
-                        Button {
-                            changedColor = color
-                            withAnimation(Animation.easeInOut) {
-                                selectedColor = color
-                            }
-                            debugPrint(color)
-                        } label: {
-                            ColorButton(singleColor: color).overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 4).padding(-4)
-                            )
-                        }
-                    }
-                }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//First color
-                HStack {
-                    ForEach(secondColorSet, id: \.self) { color in
-                        Button {
-                            changedColor = color
-                            withAnimation(Animation.easeInOut) {
-                                selectedColor = color
-                            }
-                            debugPrint(color)
-                        } label: {
-                            ColorButton(singleColor: color).overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 3).padding(-4)
-                            )
-                        }
-                    }
-                }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//SEcond
-                HStack {
-                    Spacer()
-                    Button("Özel Renk") {
-                        print("hello")
-                    }.frame(width: 110)
-                        .background(changedColor)
-                        .cornerRadius(10)
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16))
-                        .foregroundColor(.white)
-                        .font(.headline)
-                    
-                } // Özel Renk
-                VStack(alignment: .leading) {
-                    
-                    Text("Kategori").padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
-                }
-                VStack {
-                    HStack {
-                        ForEach(firstCategorySet, id: \.self) { title in
-                            Button {
-                                debugPrint("hello")
-                            } label: {
-                                CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
-                            }
-                            Spacer()
-                        }
-                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
-                    
-                    HStack {
-                        ForEach(secondCategorySet, id: \.self) { title in
-                            Button {
-                                debugPrint("hello")
-                            } label: {
-                                CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
-                            }
-                            Spacer()
-                        }
-                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: paddingValue, trailing: 0))
+                    }// Hedef - Hatırlatma
                     VStack {
+                        Text("Renk")
+                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
+                    HStack {
                         
-                        Button("Alışkanlık Ekle") {
-                            print("h")
+                        ForEach(firstColorSet, id: \.self) { color in
+                            Button {
+                                changedColor = color
+                                withAnimation(Animation.easeInOut) {
+                                    selectedColor = color
+                                }
+                                debugPrint(color)
+                            } label: {
+                                ColorButton(singleColor: color).overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 4).padding(-4)
+                                )
+                            }
                         }
-                        .frame(width: 350, height: 50)
-                        .background(changedColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(20)
-                        .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//First color
+                    HStack {
+                        ForEach(secondColorSet, id: \.self) { color in
+                            Button {
+                                changedColor = color
+                                withAnimation(Animation.easeInOut) {
+                                    selectedColor = color
+                                }
+                                debugPrint(color)
+                            } label: {
+                                ColorButton(singleColor: color).overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 3).padding(-4)
+                                )
+                            }
+                        }
+                    }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//SEcond
+                    HStack {
                         Spacer()
+                        Button("Özel Renk") {
+                            print("hello")
+                        }.frame(width: 110)
+                            .background(changedColor)
+                            .cornerRadius(10)
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16))
+                            .foregroundColor(.white)
+                            .font(.headline)
+                        
+                    } // Özel Renk
+                    VStack(alignment: .leading) {
+                        
+                        Text("Kategori").padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                     }
+                    VStack {
+                        HStack {
+                            ForEach(firstCategorySet, id: \.self) { title in
+                                Button {
+                                    debugPrint("hello")
+                                } label: {
+                                    CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
+                                }
+                                Spacer()
+                            }
+                        }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
+                        
+                        HStack {
+                            ForEach(secondCategorySet, id: \.self) { title in
+                                Button {
+                                    debugPrint("hello")
+                                } label: {
+                                    CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
+                                }
+                                Spacer()
+                            }
+                        }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: paddingValue, trailing: 0))
+                        VStack {
+                            
+                            Button("Alışkanlık Ekle") {
+                                print("h")
+                            }
+                            .frame(width: 350, height: 50)
+                            .background(changedColor)
+                            .foregroundColor(.white)
+                            .cornerRadius(20)
+                            .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                            Spacer()
+                        }
+                        
+                    } // Kategoriler
                     
-                } // Kategoriler
-                
+                }
             }
             
         }.toolbar {
             ToolbarItem(placement: .principal) {
                 Image("logo")
             }
+            
         }
-        
+        .offset()
     }
 }
 
 struct AddTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaskView()
+        AddTaskView(goalText: "")
     }
 }
