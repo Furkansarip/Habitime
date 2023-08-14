@@ -13,9 +13,12 @@ struct AddTaskView: View {
     var secondColorSet: [Color] = [Color.purple, Color.secondary, Color.cyan, Color.black, Color.mint, Color.teal, Color.gray.opacity(0.4), Color.pink.opacity(0.7), Color.green.opacity(0.5)]
     var firstCategorySet: [String] = ["Aktivite", "Spor", "Besin"]
     var secondCategorySet: [String] = ["Sanat", "Para", "Çeşitli"]
+    let options = ["Seçenek 1", "Seçenek 2", "Seçenek 3"]
     var paddingValue: CGFloat = 22
     @State private var changedColor: Color = Color.pink
     @State private var selectedColor: Color? = nil
+    @State private var selectedOption = 0
+    @State private var isPickerVisible = false
     var body: some View {
         
         NavigationStack {
@@ -51,12 +54,26 @@ struct AddTaskView: View {
                     }//Hedef
                     VStack(alignment: .leading) {
                         Text("Hatırlatma").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                        TextField("Hatırlatıcı", text: $habitTitle)
+                        TextField("Hatırlatıcı", text: .constant(options[selectedOption]))
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                             .frame(height: 40)
                             .background(Color.gray.opacity(0.2).cornerRadius(10))
                             .font(.headline)
                             .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                            .onTapGesture {
+                                isPickerVisible.toggle()
+                            }
+                        if isPickerVisible {
+                            Picker("", selection: $selectedOption) {
+                                ForEach(0..<options.count) { index in
+                                    Text(options[index]).tag(index)
+                                }
+                            }
+                            .pickerStyle(.wheel)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                        }
+                        
                     }
                 }// Hedef - Hatırlatma
                 VStack {
