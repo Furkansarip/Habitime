@@ -16,7 +16,7 @@ struct ContentView: View {
                 Image("man")
                 
                 Button(action: mainScreen) {
-                    NavigationLink(destination: AddTaskView(goalText: "")) {
+                    NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
                         Image("plus2").frame(width: 40, height: 40).border(.gray, width: 2).foregroundColor(.pink).background(Color.gray.opacity(0.7)).cornerRadius(10)
                     }
                     

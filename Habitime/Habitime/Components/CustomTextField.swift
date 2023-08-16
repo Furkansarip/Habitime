@@ -15,7 +15,7 @@ struct CustomTextField: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField()
         textField.delegate = context.coordinator
-        textField.placeholder = "Hedef"
+        textField.placeholder = "Seçim"
         return textField
     }
 

@@ -24,7 +24,6 @@ struct CustomPickerView: View {
     }
     var body: some View {
         VStack {
-            Text("Hedef: \(goalText)")
             HStack {
                 Picker("", selection: $selectedOption) {
                     ForEach(chooseTarget.indices, id: \.self) { index in

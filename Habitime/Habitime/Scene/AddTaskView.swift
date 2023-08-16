@@ -11,7 +11,9 @@ import UIKit
 struct AddTaskView: View {
     @State var habitTitle: String = ""
     @State var goalText: String
+    @State var reminderText: String
     @State private var isSheetPresented = false
+    @State private var isSheetPresented2 = false
     var firstColorSet: [Color] = [Color.red, Color.blue, Color.yellow, Color.pink, Color.indigo, Color.green, Color.gray, Color.orange, Color.brown]
     var secondColorSet: [Color] = [Color.purple, Color.secondary, Color.cyan, Color.black, Color.mint, Color.teal, Color.gray.opacity(0.4), Color.pink.opacity(0.7), Color.green.opacity(0.5)]
     var firstCategorySet: [String] = ["Aktivite", "Spor", "Besin"]
@@ -60,19 +62,24 @@ struct AddTaskView: View {
                                     isSheetPresented = true
                                     
                                 }.sheet(isPresented: $isSheetPresented) {
-                                    CustomPickerView(isSheetPresented: $isSheetPresented, goalText: $goalText).presentationDetents([.fraction(0.4)])
+                                    CustomPickerView(isSheetPresented: $isSheetPresented, goalText: $goalText).presentationDetents([.fraction(0.35)])
+                                        .presentationDragIndicator(.visible)
                                 }
                         }//Hedef
                         VStack(alignment: .leading) {
-                            Text("Hatırlatma").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                            TextField("Hatırlatıcı", text: $habitTitle)
+                            Text("Hatırlatıcı").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
+                            CustomTextField(text: $reminderText, isFirstResponder: false)
                                 .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                 .frame(height: 40)
                                 .background(Color.gray.opacity(0.2).cornerRadius(10))
                                 .font(.headline)
                                 .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
                                 .onTapGesture {
-                                    isPickerVisible.toggle()
+                                    isSheetPresented2 = true
+                                    
+                                }.sheet(isPresented: $isSheetPresented2) {
+                                    DayPicker(reminderText: $reminderText, isPresentedDay: $isSheetPresented2).presentationDetents([.fraction(0.35)])
+                                        .presentationDragIndicator(.visible)
                                 }
                             
                         }
@@ -181,6 +188,6 @@ struct AddTaskView: View {
 
 struct AddTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaskView(goalText: "")
+        AddTaskView(goalText: "", reminderText: "")
     }
 }
