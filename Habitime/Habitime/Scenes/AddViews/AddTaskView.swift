@@ -149,7 +149,7 @@ struct AddTaskView: View {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                                     
                                 }.sheet(isPresented: $iconPresented) {
-                                    IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other)
+                                    IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor ?? .pink)
                                         .presentationDetents([.fraction(0.3)])
                                         .presentationDragIndicator(.visible)
                                 }
@@ -166,7 +166,7 @@ struct AddTaskView: View {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                                     
                                 }.sheet(isPresented: $iconPresented) {
-                                    IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other)
+                                    IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor ?? .pink)
                                         .presentationDetents([.fraction(0.3)])
                                         .presentationDragIndicator(.visible)
                                 }

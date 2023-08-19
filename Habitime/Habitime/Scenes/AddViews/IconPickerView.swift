@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IconPickerView: View {
     @State var selectedIcon: Constant.IconSet = .food
+    @State var selectedColor: Color = .red
     @State var iconSet = [String]()
     var body: some View {
         
@@ -17,7 +18,7 @@ struct IconPickerView: View {
             LazyVGrid(columns: [GridItem(.fixed(20)), GridItem(.fixed(80)), GridItem(.fixed(20)), GridItem(.fixed(80)), GridItem(.fixed(20))], spacing: 5) {
                 ForEach(iconSet, id: \.self) { icon in
                     
-                    IconView(iconName: icon, iconColor: .red)
+                    IconView(iconName: icon, iconColor: selectedColor)
                     
                 }
             }
