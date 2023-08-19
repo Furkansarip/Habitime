@@ -12,11 +12,14 @@ struct AddTaskView: View {
     @State var habitTitle: String = ""
     @State var goalText: String
     @State var reminderText: String
+    @State var selectedTitle: String = ""
     @State private var goalPickerPresented = false
     @State private var dayPickerPresented = false
+    @State private var iconPresented = false
     @State private var changedColor: Color = Color.pink
     @State private var selectedColor: Color? = nil
     @State private var selectedOption = 0
+    
     
     var firstColorSet: [Color] = Constant.firstColorSet
     var secondColorSet: [Color] = Constant.secondColorSet
@@ -26,7 +29,7 @@ struct AddTaskView: View {
     
     var body: some View {
         
-    NavigationView {
+        NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
@@ -62,7 +65,7 @@ struct AddTaskView: View {
                                     goalPickerPresented = true
                                     
                                 }.sheet(isPresented: $goalPickerPresented) {
-                                    CustomPickerView(isSheetPresented: $goalPickerPresented, goalText: $goalText).presentationDetents([.fraction(0.35)])
+                                    GoalPickerView(isSheetPresented: $goalPickerPresented, goalText: $goalText).presentationDetents([.fraction(0.35)])
                                         .presentationDragIndicator(.visible)
                                 }
                         }//Hedef
@@ -77,7 +80,7 @@ struct AddTaskView: View {
                                     dayPickerPresented = true
                                     
                                 }.sheet(isPresented: $dayPickerPresented) {
-                                    DayPicker(reminderText: $reminderText, isPresentedDay: $dayPickerPresented).presentationDetents([.fraction(0.35)])
+                                    DayPickerView(reminderText: $reminderText, isPresentedDay: $dayPickerPresented).presentationDetents([.fraction(0.35)])
                                         .presentationDragIndicator(.visible)
                                 }
                             
@@ -136,12 +139,19 @@ struct AddTaskView: View {
                         Text("Kategori").padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                     }
                     VStack {
+                        
                         HStack {
                             ForEach(firstCategorySet, id: \.self) { title in
                                 Button {
-                                   
+                                    selectedTitle = title
+                                    iconPresented = true
                                 } label: {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
+                                    
+                                }.sheet(isPresented: $iconPresented) {
+                                    IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other)
+                                        .presentationDetents([.fraction(0.3)])
+                                        .presentationDragIndicator(.visible)
                                 }
                                 Spacer()
                             }
@@ -150,9 +160,15 @@ struct AddTaskView: View {
                         HStack {
                             ForEach(secondCategorySet, id: \.self) { title in
                                 Button {
-                                    print(title)
+                                    selectedTitle = title
+                                    iconPresented = true
                                 } label: {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
+                                    
+                                }.sheet(isPresented: $iconPresented) {
+                                    IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other)
+                                        .presentationDetents([.fraction(0.3)])
+                                        .presentationDragIndicator(.visible)
                                 }
                                 Spacer()
                             }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DayPicker: View {
+struct DayPickerView: View {
     @State var days = Constant.days
     @State private var selectedTime = Date()
     @State var selectedButtons: Set<String> = []
@@ -69,6 +69,6 @@ struct DayPicker: View {
 
 struct DayPicker_Previews: PreviewProvider {
     static var previews: some View {
-        DayPicker(reminderText: .constant(""), isPresentedDay: .constant(false))
+        DayPickerView(reminderText: .constant(""), isPresentedDay: .constant(false))
     }
 }

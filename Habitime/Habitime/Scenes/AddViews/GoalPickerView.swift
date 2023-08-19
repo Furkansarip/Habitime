@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CustomPickerView: View {
+struct GoalPickerView: View {
     @State private var selectedOption = 0
     @State private var selectedOption2 = 0
     let chooseTarget = ["Günlük", "Haftalık", "Aylık"]
@@ -78,6 +78,6 @@ struct CustomPickerView: View {
 
 struct CustomPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomPickerView(isSheetPresented: .constant(false), goalText: .constant(""))
+        GoalPickerView(isSheetPresented: .constant(false), goalText: .constant(""))
     }
 }

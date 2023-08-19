@@ -13,4 +13,13 @@ struct Constant {
     static let firstCategorySet = ["Aktivite", "Spor", "Besin"]
     static let secondCategorySet = ["Sanat", "Para", "Çeşitli"]
     static let days = ["Pzt", "Sal", "Çarş", "Perş", "Cum", "Cmt", "Paz"]
+    
+    enum IconSet: String {
+        case sport = "Spor"
+        case food = "Besin"
+        case activity = "Aktivite"
+        case art = "Sanat"
+        case money = "Para"
+        case other = "Çeşitli"
+    }
 }

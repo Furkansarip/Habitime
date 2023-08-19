@@ -16,12 +16,14 @@
 		74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27CB2A8425E500B24C7B /* AddTaskView.swift */; };
 		74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27CE2A85458900B24C7B /* ColorButton.swift */; };
 		74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D12A878CE700B24C7B /* CategoryButton.swift */; };
-		74CE27D42A89401400B24C7B /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D32A89401400B24C7B /* CustomPickerView.swift */; };
+		74CE27D42A89401400B24C7B /* GoalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D32A89401400B24C7B /* GoalPickerView.swift */; };
 		74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */; };
 		74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D92A8D48EE00B24C7B /* DayButton.swift */; };
-		74CE27DC2A8D49C900B24C7B /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27DB2A8D49C900B24C7B /* DayPicker.swift */; };
+		74CE27DC2A8D49C900B24C7B /* DayPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27DB2A8D49C900B24C7B /* DayPickerView.swift */; };
 		74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E02A90C84000B24C7B /* Date+Ext.swift */; };
 		74CE27E42A90D86500B24C7B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E32A90D86500B24C7B /* Constant.swift */; };
+		74CE27E82A90F96700B24C7B /* IconPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E72A90F96700B24C7B /* IconPickerView.swift */; };
+		74CE27EA2A90FF4D00B24C7B /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E92A90FF4D00B24C7B /* IconView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,12 +37,14 @@
 		74CE27CB2A8425E500B24C7B /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		74CE27CE2A85458900B24C7B /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		74CE27D12A878CE700B24C7B /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
-		74CE27D32A89401400B24C7B /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
+		74CE27D32A89401400B24C7B /* GoalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPickerView.swift; sourceTree = "<group>"; };
 		74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		74CE27D92A8D48EE00B24C7B /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
-		74CE27DB2A8D49C900B24C7B /* DayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPicker.swift; sourceTree = "<group>"; };
+		74CE27DB2A8D49C900B24C7B /* DayPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerView.swift; sourceTree = "<group>"; };
 		74CE27E02A90C84000B24C7B /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		74CE27E32A90D86500B24C7B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		74CE27E72A90F96700B24C7B /* IconPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerView.swift; sourceTree = "<group>"; };
+		74CE27E92A90FF4D00B24C7B /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 				74CE27D12A878CE700B24C7B /* CategoryButton.swift */,
 				74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */,
 				74CE27D92A8D48EE00B24C7B /* DayButton.swift */,
+				74CE27E92A90FF4D00B24C7B /* IconView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -134,8 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
-				74CE27D32A89401400B24C7B /* CustomPickerView.swift */,
-				74CE27DB2A8D49C900B24C7B /* DayPicker.swift */,
+				74CE27D32A89401400B24C7B /* GoalPickerView.swift */,
+				74CE27DB2A8D49C900B24C7B /* DayPickerView.swift */,
+				74CE27E72A90F96700B24C7B /* IconPickerView.swift */,
 			);
 			path = AddViews;
 			sourceTree = "<group>";
@@ -218,16 +224,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74CE27EA2A90FF4D00B24C7B /* IconView.swift in Sources */,
 				74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */,
 				74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */,
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
 				74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */,
+				74CE27E82A90F96700B24C7B /* IconPickerView.swift in Sources */,
 				74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */,
 				74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */,
 				74CE27E42A90D86500B24C7B /* Constant.swift in Sources */,
 				74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */,
-				74CE27DC2A8D49C900B24C7B /* DayPicker.swift in Sources */,
-				74CE27D42A89401400B24C7B /* CustomPickerView.swift in Sources */,
+				74CE27DC2A8D49C900B24C7B /* DayPickerView.swift in Sources */,
+				74CE27D42A89401400B24C7B /* GoalPickerView.swift in Sources */,
 				74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */,
 				74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */,
 				74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */,
