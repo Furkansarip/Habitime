@@ -75,10 +75,9 @@
 			children = (
 				74CE27E22A90D85600B24C7B /* Constants */,
 				74CE27DF2A90C83700B24C7B /* Extensions */,
-				74CE27D02A878B3600B24C7B /* Scene */,
+				74CE27D02A878B3600B24C7B /* Scenes */,
 				74CE27CD2A85458000B24C7B /* Components */,
 				74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */,
-				74CE27BA2A83F90B00B24C7B /* HomeView.swift */,
 				74CE27BC2A83F90C00B24C7B /* Assets.xcassets */,
 				74CE27C12A83F90C00B24C7B /* Persistence.swift */,
 				74CE27C32A83F90C00B24C7B /* Habitime.xcdatamodeld */,
@@ -106,12 +105,13 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		74CE27D02A878B3600B24C7B /* Scene */ = {
+		74CE27D02A878B3600B24C7B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				74CE27E62A90E14900B24C7B /* Home */,
 				74CE27E52A90DE6600B24C7B /* AddViews */,
 			);
-			path = Scene;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		74CE27DF2A90C83700B24C7B /* Extensions */ = {
@@ -133,11 +133,19 @@
 		74CE27E52A90DE6600B24C7B /* AddViews */ = {
 			isa = PBXGroup;
 			children = (
+				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
 				74CE27D32A89401400B24C7B /* CustomPickerView.swift */,
 				74CE27DB2A8D49C900B24C7B /* DayPicker.swift */,
-				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
 			);
 			path = AddViews;
+			sourceTree = "<group>";
+		};
+		74CE27E62A90E14900B24C7B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				74CE27BA2A83F90B00B24C7B /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

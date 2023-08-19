@@ -139,7 +139,7 @@ struct AddTaskView: View {
                         HStack {
                             ForEach(firstCategorySet, id: \.self) { title in
                                 Button {
-                                    debugPrint("hello")
+                                   
                                 } label: {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                                 }
@@ -150,7 +150,7 @@ struct AddTaskView: View {
                         HStack {
                             ForEach(secondCategorySet, id: \.self) { title in
                                 Button {
-                                    debugPrint("hello")
+                                    print(title)
                                 } label: {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                                 }
