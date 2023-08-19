@@ -9,12 +9,12 @@ import SwiftUI
 
 struct DayButton: View {
     @State var dayName: String
+    
     var body: some View {
-        Button(dayName) {}
+        Text(dayName)
             .font(.system(size: 20))
             .foregroundColor(.white)
             .frame(minWidth: 50, minHeight: 50)
-            .background(.gray.opacity(0.7))
             .cornerRadius(12)
     }
 }

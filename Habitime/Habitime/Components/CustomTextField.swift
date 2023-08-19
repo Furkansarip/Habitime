@@ -16,6 +16,18 @@ struct CustomTextField: UIViewRepresentable {
         let textField = UITextField()
         textField.delegate = context.coordinator
         textField.placeholder = "Seçim"
+        
+        textField.minimumFontSize = 8
+        if let text = textField.text {
+            let textSize = (text as NSString).size(withAttributes: [NSAttributedString.Key.font: textField.font!])
+            let maxWidth = textField.frame.width
+            let newWidth = min(textSize.width + 20, maxWidth) // 20: padding
+            
+            UIView.animate(withDuration: 0.2) {
+                textField.frame.size.width = newWidth
+            }
+        }
+        
         return textField
     }
 

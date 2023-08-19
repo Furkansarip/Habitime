@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */; };
-		74CE27BB2A83F90B00B24C7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27BA2A83F90B00B24C7B /* ContentView.swift */; };
+		74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27BA2A83F90B00B24C7B /* HomeView.swift */; };
 		74CE27BD2A83F90C00B24C7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BC2A83F90C00B24C7B /* Assets.xcassets */; };
 		74CE27C02A83F90C00B24C7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BF2A83F90C00B24C7B /* Preview Assets.xcassets */; };
 		74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27C12A83F90C00B24C7B /* Persistence.swift */; };
@@ -20,12 +20,14 @@
 		74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */; };
 		74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27D92A8D48EE00B24C7B /* DayButton.swift */; };
 		74CE27DC2A8D49C900B24C7B /* DayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27DB2A8D49C900B24C7B /* DayPicker.swift */; };
+		74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E02A90C84000B24C7B /* Date+Ext.swift */; };
+		74CE27E42A90D86500B24C7B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E32A90D86500B24C7B /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		74CE27B52A83F90B00B24C7B /* Habitime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitimeApp.swift; sourceTree = "<group>"; };
-		74CE27BA2A83F90B00B24C7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		74CE27BA2A83F90B00B24C7B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		74CE27BC2A83F90C00B24C7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74CE27BF2A83F90C00B24C7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		74CE27C12A83F90C00B24C7B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -37,6 +39,8 @@
 		74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		74CE27D92A8D48EE00B24C7B /* DayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayButton.swift; sourceTree = "<group>"; };
 		74CE27DB2A8D49C900B24C7B /* DayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPicker.swift; sourceTree = "<group>"; };
+		74CE27E02A90C84000B24C7B /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		74CE27E32A90D86500B24C7B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,16 +73,16 @@
 		74CE27B72A83F90B00B24C7B /* Habitime */ = {
 			isa = PBXGroup;
 			children = (
+				74CE27E22A90D85600B24C7B /* Constants */,
+				74CE27DF2A90C83700B24C7B /* Extensions */,
 				74CE27D02A878B3600B24C7B /* Scene */,
 				74CE27CD2A85458000B24C7B /* Components */,
 				74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */,
-				74CE27BA2A83F90B00B24C7B /* ContentView.swift */,
+				74CE27BA2A83F90B00B24C7B /* HomeView.swift */,
 				74CE27BC2A83F90C00B24C7B /* Assets.xcassets */,
 				74CE27C12A83F90C00B24C7B /* Persistence.swift */,
 				74CE27C32A83F90C00B24C7B /* Habitime.xcdatamodeld */,
 				74CE27BE2A83F90C00B24C7B /* Preview Content */,
-				74CE27D32A89401400B24C7B /* CustomPickerView.swift */,
-				74CE27DB2A8D49C900B24C7B /* DayPicker.swift */,
 			);
 			path = Habitime;
 			sourceTree = "<group>";
@@ -105,9 +109,35 @@
 		74CE27D02A878B3600B24C7B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
+				74CE27E52A90DE6600B24C7B /* AddViews */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		74CE27DF2A90C83700B24C7B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				74CE27E02A90C84000B24C7B /* Date+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		74CE27E22A90D85600B24C7B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				74CE27E32A90D86500B24C7B /* Constant.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		74CE27E52A90DE6600B24C7B /* AddViews */ = {
+			isa = PBXGroup;
+			children = (
+				74CE27D32A89401400B24C7B /* CustomPickerView.swift */,
+				74CE27DB2A8D49C900B24C7B /* DayPicker.swift */,
+				74CE27CB2A8425E500B24C7B /* AddTaskView.swift */,
+			);
+			path = AddViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,15 +211,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */,
+				74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */,
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
 				74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */,
 				74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */,
 				74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */,
+				74CE27E42A90D86500B24C7B /* Constant.swift in Sources */,
 				74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */,
 				74CE27DC2A8D49C900B24C7B /* DayPicker.swift in Sources */,
 				74CE27D42A89401400B24C7B /* CustomPickerView.swift in Sources */,
 				74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */,
-				74CE27BB2A83F90B00B24C7B /* ContentView.swift in Sources */,
+				74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */,
 				74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
