@@ -26,7 +26,7 @@ struct DayPickerView: View {
                         if selectedButtonIndices.contains(day) {
                             selectedButtonIndices.remove(day)
                             selectedButtons.remove(day)
-                            reminderText = selectedButtons.joined(separator: ", ")
+                            reminderText = "\(selectedButtons.joined(separator: ", ")) \(selectedTime.getCurrentTime())"
                         } else {
                             selectedButtonIndices.insert(day)
                             reminderText = "\(selectedButtons.joined(separator: ", ")) \(selectedTime.getCurrentTime())"

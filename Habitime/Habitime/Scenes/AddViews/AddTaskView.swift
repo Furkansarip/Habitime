@@ -10,6 +10,7 @@ import UIKit
 
 struct AddTaskView: View {
     @State var habitTitle: String = ""
+    @State var habitDescription: String = ""
     @State var goalText: String
     @State var reminderText: String
     @State var selectedTitle: String = ""
@@ -45,7 +46,7 @@ struct AddTaskView: View {
                     VStack(alignment: .leading) {
                         Text("Açıklama").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 16))
                         
-                        TextField("Açıklama Ekle", text: $habitTitle)
+                        TextField("Açıklama Ekle", text: $habitDescription)
                             .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                             .frame(height: 40)
                             .background(Color.gray.opacity(0.3).cornerRadius(10))
@@ -143,12 +144,19 @@ struct AddTaskView: View {
                         HStack {
                             ForEach(firstCategorySet, id: \.self) { title in
                                 Button {
-                                    selectedTitle = title
-                                    iconPresented = true
+                                        selectedTitle = title
+                                        print("taskview",selectedTitle)
+                                        iconPresented = true
                                 } label: {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
-                                    
-                                }.sheet(isPresented: $iconPresented) {
+                                }.onChange(of: selectedTitle, perform: { newValue in
+                                    print("news",selectedTitle)
+                                    print("newVal",newValue)
+                                    if newValue != "" {
+                                        iconPresented = true
+                                    }
+                                })
+                                .sheet(isPresented: $iconPresented) {
                                     IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor ?? .pink)
                                         .presentationDetents([.fraction(0.3)])
                                         .presentationDragIndicator(.visible)
@@ -160,8 +168,11 @@ struct AddTaskView: View {
                         HStack {
                             ForEach(secondCategorySet, id: \.self) { title in
                                 Button {
-                                    selectedTitle = title
-                                    iconPresented = true
+                                    DispatchQueue.main.async {
+                                        selectedTitle = title
+                                        print("taskview",selectedTitle)
+                                        iconPresented = true
+                                    }
                                 } label: {
                                     CategoryButton(buttonTitle: title, buttonColor: Color.gray.opacity(0.6))
                                     
@@ -203,6 +214,6 @@ struct AddTaskView: View {
 
 struct AddTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaskView(goalText: "", reminderText: "")
+        AddTaskView(goalText: "", reminderText: "", selectedTitle: "Besin")
     }
 }

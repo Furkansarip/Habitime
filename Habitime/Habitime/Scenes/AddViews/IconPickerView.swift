@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IconPickerView: View {
-    @State var selectedIcon: Constant.IconSet = .food
+    @State var selectedIcon: Constant.IconSet
     @State var selectedColor: Color = .red
     @State var iconSet = [String]()
     var body: some View {
@@ -24,31 +24,26 @@ struct IconPickerView: View {
             }
             
         }.onAppear {
+            print("ff",selectedIcon)
             drawIconSet()
         }
     }
     
-    @discardableResult func drawIconSet() -> [String] {
-        print(selectedIcon)
+    func drawIconSet() {
         switch selectedIcon {
         case .sport:
             iconSet = ["figure.walk", "figure.outdoor.cycle", "figure.strengthtraining.traditional"]
-            return iconSet
         case .food:
             iconSet = ["leaf.fill", "heart.fill", "star.fill", "bolt.fill", "cloud.fill", "moon.fill", "sun.min.fill", "bicycle", "figure.walk", "figure.outdoor.cycle", "figure.strengthtraining.traditional", "gamecontroller", "arrowtriangle.right.circle", "network", "camera"]
-            return iconSet
         case .activity:
             iconSet = ["gamecontroller", "arrowtriangle.right.circle", "network", "camera"]
-            return iconSet
         case .art:
             iconSet = ["music.quarternote.3", "house", "lightbulb", "paintpalette"]
-            return iconSet
         case .money:
             iconSet = ["dollarsign", "clock", "hourglass", "bag"]
-            return iconSet
         case .other:
             iconSet = ["pencil", "list.bullet", "airplane", "car"]
-            return iconSet
+            
         }
     }
 }
@@ -56,6 +51,6 @@ struct IconPickerView: View {
 
 struct IconPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        IconPickerView()
+        IconPickerView(selectedIcon: .food)
     }
 }

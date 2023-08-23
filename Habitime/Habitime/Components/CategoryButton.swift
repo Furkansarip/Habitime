@@ -16,7 +16,6 @@ struct CategoryButton: View {
             .background(buttonColor)
             .cornerRadius(10)
             .foregroundColor(.white)
-        
     }
 }
 
