@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IconView: View {
     @State var iconName: String = "star.fill"
+    @EnvironmentObject var selectedIcon: IconStore
     @State var iconColor: Color = .indigo
     var body: some View {
         ZStack {
@@ -19,6 +20,7 @@ struct IconView: View {
             
             Button {
                 print(iconName)
+                selectedIcon.selectedIconName = iconName
             } label: {
                 Image(systemName: iconName)
                     .font(.system(size: 22))
@@ -30,8 +32,4 @@ struct IconView: View {
 }
 
 
-struct IconView_Previews: PreviewProvider {
-    static var previews: some View {
-        IconView()
-    }
-}
+

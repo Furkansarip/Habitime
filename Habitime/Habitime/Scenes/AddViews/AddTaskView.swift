@@ -8,6 +8,10 @@
 import SwiftUI
 import UIKit
 
+class IconStore: ObservableObject {
+    @Published var selectedIconName: String = ""
+}
+
 struct AddTaskView: View {
     @State var habitTitle: String = ""
     @State var habitDescription: String = ""
@@ -20,8 +24,11 @@ struct AddTaskView: View {
     @State private var changedColor: Color = Color.pink
     @State private var selectedColor: Color? = nil
     @State private var selectedOption = 0
-    
-    
+    @State private var showingAlert = false
+    @State private var showingErrorAlert = false
+    @State private var showingSuccessAlert = false
+    @EnvironmentObject var iconStore: IconStore
+    @Environment(\.presentationMode) var presentationMode
     var firstColorSet: [Color] = Constant.firstColorSet
     var secondColorSet: [Color] = Constant.secondColorSet
     var firstCategorySet: [String] = Constant.firstCategorySet
@@ -187,7 +194,13 @@ struct AddTaskView: View {
                         VStack {
                             
                             Button("Alışkanlık Ekle") {
-                                print("h")
+                                if habitTitle.isEmpty || habitDescription.isEmpty || goalText.isEmpty || reminderText.isEmpty || iconStore.selectedIconName.isEmpty {
+                                    showingAlert = true
+                                } else {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }.alert(isPresented: $showingAlert) {
+                                Alert(title: Text("Boş Alan bırakılamaz!"), message: Text("Lütfen gerekli alanları doldurun."), dismissButton: .default(Text("Tamam")))
                             }
                             .frame(width: 350, height: 50)
                             .background(changedColor)
@@ -209,6 +222,15 @@ struct AddTaskView: View {
             
         }
         .offset()
+    }
+    
+    func clearValues() {
+        iconStore.selectedIconName = ""
+        habitTitle = ""
+        habitDescription = ""
+        goalText = ""
+        reminderText = ""
+        
     }
 }
 

@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct HabitimeApp: App {
     let persistenceController = PersistenceController.shared
-
+    let iconStore = IconStore()
     var body: some Scene {
         WindowGroup {
             HomeView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(iconStore)
         }
     }
 }
