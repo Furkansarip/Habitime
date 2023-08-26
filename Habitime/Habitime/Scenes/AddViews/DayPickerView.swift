@@ -10,48 +10,51 @@ import SwiftUI
 struct DayPickerView: View {
     @State var days = Constant.days
     @State private var selectedTime = Date()
-    @State var selectedButtons: Set<String> = []
-    @State private var selectedButtonIndices: Set<String> = []
-    
+    @State private var selectedButtons: [String] = []
+    @State var allSelected = false
+    @State var defaultColor: Color = .gray.opacity(0.7)
+    @State var changedColor: Color
     @Binding var reminderText: String
     @Binding var isPresentedDay: Bool
     
     var body: some View {
         VStack {
+            Text(reminderText)
             HStack {
                 ForEach(days, id: \.self) { day in
                     Button {
-                        selectedButtons.insert(day)
-                        print(selectedButtons)
-                        if selectedButtonIndices.contains(day) {
-                            selectedButtonIndices.remove(day)
-                            selectedButtons.remove(day)
-                            reminderText = "\(selectedButtons.joined(separator: ", ")) \(selectedTime.getCurrentTime())"
+                        allSelected = false
+                        if selectedButtons.contains(day) {
+                            selectedButtons.removeAll { $0 == day }
                         } else {
-                            selectedButtonIndices.insert(day)
-                            reminderText = "\(selectedButtons.joined(separator: ", ")) \(selectedTime.getCurrentTime())"
+                            selectedButtons.append(day)
                         }
+                        updateReminderText()
                         
                     } label: {
-                        DayButton(dayName: day).background(selectedButtonIndices.contains(day) ? .pink : .gray.opacity(0.7)).cornerRadius(10)
-                    }.padding(.horizontal, -2)
+                        DayButton(dayName: day)
+                            .background(selectedButtons.contains(day) ? changedColor : defaultColor)
+                            .cornerRadius(10)
+                    }.onChange(of: selectedButtons) { _ in
+                        updateReminderText()
+                    }
+                    .padding(.horizontal, -2)
                     
                 }
             }
             
             HStack(alignment: .center) {
                 Button("Hepsini Seç") {
-                    if selectedButtonIndices.count == days.count {
-                        selectedButtonIndices.removeAll()
+                    if selectedButtons.count == days.count {
                         selectedButtons.removeAll()
-                        reminderText = ""
+                        allSelected = false
                     } else {
-                        selectedButtonIndices = Set(days)
-                        selectedButtons = Set(days)
-                        reminderText = "Everyday \(selectedTime.getCurrentTime())"
+                        selectedButtons = days
+                        allSelected = true
                     }
+                    updateReminderText()
                 }.frame(minWidth: 110, minHeight: 30)
-                    .background(.red)
+                    .background(changedColor)
                     .cornerRadius(10)
                     .foregroundColor(.white)
                     .font(.headline)
@@ -64,11 +67,21 @@ struct DayPickerView: View {
             
             
         }.edgesIgnoringSafeArea(.bottom)
+        
+    }
+    private func updateReminderText() {
+        if allSelected {
+            reminderText = "Everyday \(selectedTime.getCurrentTime())"
+        } else {
+            let selectedDaysText = selectedButtons.isEmpty ? "" : selectedButtons.joined(separator: ", ")
+            reminderText = "\(selectedDaysText) \(selectedTime.getCurrentTime())"
+        }
+        
     }
 }
 
 struct DayPicker_Previews: PreviewProvider {
     static var previews: some View {
-        DayPickerView(reminderText: .constant(""), isPresentedDay: .constant(false))
+        DayPickerView(changedColor: .pink, reminderText: .constant(""), isPresentedDay: .constant(false))
     }
 }
