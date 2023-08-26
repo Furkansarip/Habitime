@@ -11,7 +11,6 @@
 		74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27BA2A83F90B00B24C7B /* HomeView.swift */; };
 		74CE27BD2A83F90C00B24C7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BC2A83F90C00B24C7B /* Assets.xcassets */; };
 		74CE27C02A83F90C00B24C7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BF2A83F90C00B24C7B /* Preview Assets.xcassets */; };
-		74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27C12A83F90C00B24C7B /* Persistence.swift */; };
 		74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27C32A83F90C00B24C7B /* Habitime.xcdatamodeld */; };
 		74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27CB2A8425E500B24C7B /* AddTaskView.swift */; };
 		74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27CE2A85458900B24C7B /* ColorButton.swift */; };
@@ -25,6 +24,8 @@
 		74CE27E82A90F96700B24C7B /* IconPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E72A90F96700B24C7B /* IconPickerView.swift */; };
 		74CE27EA2A90FF4D00B24C7B /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27E92A90FF4D00B24C7B /* IconView.swift */; };
 		74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27EC2A96260500B24C7B /* CoreDataManager.swift */; };
+		74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28132A9A136700B24C7B /* SettingSideView.swift */; };
+		74CE28162A9A1CB800B24C7B /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28152A9A1CB800B24C7B /* SubscribeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +34,6 @@
 		74CE27BA2A83F90B00B24C7B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		74CE27BC2A83F90C00B24C7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74CE27BF2A83F90C00B24C7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		74CE27C12A83F90C00B24C7B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		74CE27C42A83F90C00B24C7B /* Habitime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Habitime.xcdatamodel; sourceTree = "<group>"; };
 		74CE27CB2A8425E500B24C7B /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		74CE27CE2A85458900B24C7B /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		74CE27E72A90F96700B24C7B /* IconPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerView.swift; sourceTree = "<group>"; };
 		74CE27E92A90FF4D00B24C7B /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		74CE27EC2A96260500B24C7B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		74CE28132A9A136700B24C7B /* SettingSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSideView.swift; sourceTree = "<group>"; };
+		74CE28152A9A1CB800B24C7B /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,6 @@
 				74CE27CD2A85458000B24C7B /* Components */,
 				74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */,
 				74CE27BC2A83F90C00B24C7B /* Assets.xcassets */,
-				74CE27C12A83F90C00B24C7B /* Persistence.swift */,
 				74CE27C32A83F90C00B24C7B /* Habitime.xcdatamodeld */,
 				74CE27BE2A83F90C00B24C7B /* Preview Content */,
 			);
@@ -109,6 +110,7 @@
 				74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */,
 				74CE27D92A8D48EE00B24C7B /* DayButton.swift */,
 				74CE27E92A90FF4D00B24C7B /* IconView.swift */,
+				74CE28152A9A1CB800B24C7B /* SubscribeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				74CE27BA2A83F90B00B24C7B /* HomeView.swift */,
+				74CE28132A9A136700B24C7B /* SettingSideView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -238,11 +241,11 @@
 				74CE27EA2A90FF4D00B24C7B /* IconView.swift in Sources */,
 				74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */,
 				74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */,
+				74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */,
 				74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */,
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
 				74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */,
 				74CE27E82A90F96700B24C7B /* IconPickerView.swift in Sources */,
-				74CE27C22A83F90C00B24C7B /* Persistence.swift in Sources */,
 				74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */,
 				74CE27E42A90D86500B24C7B /* Constant.swift in Sources */,
 				74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */,
@@ -251,6 +254,7 @@
 				74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */,
 				74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */,
 				74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */,
+				74CE28162A9A1CB800B24C7B /* SubscribeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
