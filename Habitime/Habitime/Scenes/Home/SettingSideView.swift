@@ -53,7 +53,7 @@ struct SettingSideView: View {
                 }
                 
                 Section(header: Text("Abone Ol")) {
-                    NavigationLink(destination: CategoryButton(buttonTitle: "Test", buttonColor: .red)) {
+                    NavigationLink(destination: CategoryButton(buttonTitle: "Test", buttonColor: .constant(.red))) {
                        SubscribeView()
                     }
                 }

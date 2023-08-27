@@ -35,6 +35,7 @@ struct DayPickerView: View {
                         DayButton(dayName: day)
                             .background(selectedButtons.contains(day) ? changedColor : defaultColor)
                             .cornerRadius(10)
+                            .padding(.horizontal, -1)
                     }.onChange(of: selectedButtons) { _ in
                         updateReminderText()
                     }
@@ -54,7 +55,7 @@ struct DayPickerView: View {
                     }
                     updateReminderText()
                 }.frame(minWidth: 110, minHeight: 30)
-                    .background(changedColor)
+                    .background(allSelected ? changedColor : defaultColor)
                     .cornerRadius(10)
                     .foregroundColor(.white)
                     .font(.headline)

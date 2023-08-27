@@ -48,7 +48,7 @@ struct GoalPickerView: View {
                 .frame(maxWidth: .infinity)
             }
             
-            Button("Kapat") {
+            Button("Seçimi Onayla") {
                 isSheetPresented = false
                 goalText = "\(currentItems[selectedOption2]) \(targetText)"
             }
@@ -62,14 +62,14 @@ struct GoalPickerView: View {
         print(goalText)
         if selectedOption == 0 {
             targetText = "Günlük"
-            selectedOption2 = 2
+            selectedOption2 = 0
         }
         else if selectedOption == 1 {
             targetText = "Haftalık"
-            selectedOption2 = 2
+            selectedOption2 = 0
         } else {
             targetText = "Aylık"
-            selectedOption2 = 2
+            selectedOption2 = 0
         }
         
     }

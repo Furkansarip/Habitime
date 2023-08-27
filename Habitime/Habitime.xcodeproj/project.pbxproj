@@ -26,6 +26,7 @@
 		74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27EC2A96260500B24C7B /* CoreDataManager.swift */; };
 		74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28132A9A136700B24C7B /* SettingSideView.swift */; };
 		74CE28162A9A1CB800B24C7B /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28152A9A1CB800B24C7B /* SubscribeView.swift */; };
+		74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		74CE27EC2A96260500B24C7B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		74CE28132A9A136700B24C7B /* SettingSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSideView.swift; sourceTree = "<group>"; };
 		74CE28152A9A1CB800B24C7B /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
+		74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				74CE27E02A90C84000B24C7B /* Date+Ext.swift */,
+				74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			files = (
 				74CE27EA2A90FF4D00B24C7B /* IconView.swift in Sources */,
 				74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */,
+				74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */,
 				74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */,
 				74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */,
 				74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */,
