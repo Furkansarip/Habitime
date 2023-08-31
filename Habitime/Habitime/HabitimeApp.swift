@@ -13,10 +13,10 @@ struct HabitimeApp: App {
     let iconStore = IconStore()
     var body: some Scene {
         WindowGroup {
-            /*HomeView()
+            HomeView()
                 .environment(\.managedObjectContext, dataManager.container.viewContext)
-                .environmentObject(iconStore) */
-            TrackerView()
+                .environmentObject(iconStore)
+            /*TrackerView() */
         }
     }
 }

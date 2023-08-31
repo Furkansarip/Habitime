@@ -27,6 +27,7 @@
 		74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28132A9A136700B24C7B /* SettingSideView.swift */; };
 		74CE28162A9A1CB800B24C7B /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28152A9A1CB800B24C7B /* SubscribeView.swift */; };
 		74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */; };
+		74CE281E2A9F736C00B24C7B /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281D2A9F736C00B24C7B /* TrackerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		74CE28132A9A136700B24C7B /* SettingSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSideView.swift; sourceTree = "<group>"; };
 		74CE28152A9A1CB800B24C7B /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 		74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		74CE281D2A9F736C00B24C7B /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		74CE27CD2A85458000B24C7B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				74CE281D2A9F736C00B24C7B /* TrackerView.swift */,
 				74CE27CE2A85458900B24C7B /* ColorButton.swift */,
 				74CE27D12A878CE700B24C7B /* CategoryButton.swift */,
 				74CE27D72A8AA30C00B24C7B /* CustomTextField.swift */,
@@ -245,6 +248,7 @@
 				74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */,
 				74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */,
 				74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */,
+				74CE281E2A9F736C00B24C7B /* TrackerView.swift in Sources */,
 				74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */,
 				74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */,
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
