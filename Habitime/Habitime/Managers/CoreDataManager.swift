@@ -38,4 +38,8 @@ final class CoreDataManager: ObservableObject {
         
         save(context: context)
     }
+    
+    func deleteHabit(context: NSManagedObjectContext) {
+        
+    }
 }

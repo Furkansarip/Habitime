@@ -7,21 +7,28 @@ struct DayGridCell: View {
     @State var selectedDay: Date
     @State var stringColor: String
     @State var componentColor: Color = .gray
+    @Binding var selectedDays: [Int]
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
             .stroke(componentColor, lineWidth: 1)
             .frame(width: 13, height: 13)
             .background(isSelected ? componentColor : .white)
             .onAppear {
-               convertColor()
+                convertColor()
             }
             .onTapGesture {
                 print("Today",today.getFormattedDate())
                 print("DayNumber",dayNumber)
                 print("SelectedDate ",selectedDay.getFormattedDate())
-                if today.getFormattedDate() == selectedDay.getFormattedDate() {
-                    isSelected.toggle()
-                    print(dayNumber)
+                isSelected.toggle()
+                if isSelected {
+                    selectedDays.append(dayNumber)
+                    print("True",selectedDays)// Seçilen günleri diziye ekleyin
+                } else {
+                    if let index = selectedDays.firstIndex(of: dayNumber) {
+                        selectedDays.remove(at: index)
+                        print("f",selectedDays)// Seçilen günleri diziye ekleyin// Seçilen günleri diziden kaldırın
+                                            }
                 }
             }
     }
@@ -39,7 +46,7 @@ struct TrackerView: View {
     @State var habitHexColor: String
     @State var habitIcon: String
     @State var completedDay = Date()
-    
+    @State var selectedDays: [Int] = []
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15).background(Color.clear)
@@ -57,9 +64,9 @@ struct TrackerView: View {
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 20)
                         }
-                        
                     
-                    VStack {
+                    
+                    VStack(alignment: .leading) {
                         Text(habitTitle)
                         Text(habitDesc)
                     }
@@ -71,7 +78,7 @@ struct TrackerView: View {
                         .foregroundColor(habitColor)
                         .overlay {
                             Button {
-                                print("dfdsf")
+                                print(selectedDays)
                             } label: {
                                 Image(systemName: "checkmark")
                                     .resizable()
@@ -79,9 +86,9 @@ struct TrackerView: View {
                                     .frame(width: 25, height: 20)
                             }
                         }
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 25))
                 }
-                .padding(EdgeInsets(top: 25, leading: 20, bottom: 0, trailing: 0))
+                .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                 
                 GeometryReader { geometry in
                     ScrollView(.horizontal) {
@@ -92,16 +99,16 @@ struct TrackerView: View {
                                         let dayNumber = rowIndex * 73 + columnIndex + 1
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
-                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor)
+                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays)
                                             .frame(width: 20, height: 20)
                                             .background(Color.clear)
-                                            
+                                        
                                     }
                                 }
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: -15, leading: 20, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: -22, leading: 20, bottom: 0, trailing: 0))
                     .frame(width: geometry.size.width - 10, height: geometry.size.height - 40)
                 }
             }.onAppear {
@@ -109,7 +116,7 @@ struct TrackerView: View {
             }
         }
         .frame(width: 400, height: 235)
-        .background(Color.clear)
+        .background(habitColor.opacity(0.2))
     }
     
     func convertColor() {
@@ -117,7 +124,7 @@ struct TrackerView: View {
         habitColor = hexColor
     }
     
-   
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

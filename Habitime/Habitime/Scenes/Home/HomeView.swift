@@ -17,11 +17,14 @@ struct HomeView: View {
                 if goals.count > 0 {
                     List(goals) { goal in
                         Section {
-                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x").padding(EdgeInsets(top: -25, leading: -15, bottom: -40, trailing: -15))
-                                   }
+                            
+                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x").padding(EdgeInsets(top: -25, leading: -15, bottom: -45, trailing: -20)).onTapGesture {
+                                print("qqqq")
+                            }
+                        }
                         
                     }
-                    .frame(width: 400)
+                    .frame(width: 405)
                     .listStyle(.insetGrouped)
                     
                     
@@ -55,10 +58,13 @@ struct HomeView: View {
                 
                 trailing: Button {
                     
+                    
+                    
                 } label: {
-                    NavigationLink(destination:SettingSideView()) {
-                        Image(systemName: "gauge.high").foregroundColor(.pink).bold()
+                    NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
+                        Image(systemName: "plus").foregroundColor(.pink).bold()
                     }
+                    
                 })
             
         }
