@@ -9,17 +9,33 @@ import SwiftUI
 import CoreData
 
 struct HomeView: View {
+    @Environment(\.managedObjectContext) var managedObject
+    @FetchRequest(sortDescriptors:[]) var goals: FetchedResults<Habits>
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
-                Image("man")
-                NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
-                    Image("plus2").frame(width: 40, height: 40).border(.gray, width: 2).foregroundColor(.pink).background(Color.gray.opacity(0.7)).cornerRadius(10)
+                if goals.count > 0 {
+                    List(goals) { goal in
+                        Section {
+                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x").padding(EdgeInsets(top: -25, leading: -15, bottom: -40, trailing: -15))
+                                   }
+                        
+                    }
+                    .frame(width: 400)
+                    .listStyle(.insetGrouped)
+                    
+                    
+                } else {
+                    Image("man")
+                    NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
+                        Image("plus2").frame(width: 40, height: 40).border(.gray, width: 2).foregroundColor(.pink).background(Color.gray.opacity(0.7)).cornerRadius(10)
+                    }
+                    
+                    
+                    Text("Alışkanlık bulunamadı + düğmesine dokun")
+                    Text("Yeni Alışkanlık ekle").font(.callout)
                 }
                 
-                
-                Text("Alışkanlık bulunamadı + düğmesine dokun")
-                Text("Yeni Alışkanlık ekle").font(.callout)
                 
             }
             .toolbar {
@@ -44,6 +60,7 @@ struct HomeView: View {
                         Image(systemName: "gauge.high").foregroundColor(.pink).bold()
                     }
                 })
+            
         }
     }
     

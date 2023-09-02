@@ -5,11 +5,16 @@ struct DayGridCell: View {
     let today = Date()
     @State var isSelected = false
     @State var selectedDay: Date
+    @State var stringColor: String
+    @State var componentColor: Color = .gray
     var body: some View {
-        RoundedRectangle(cornerRadius: 5)
-            .stroke(Color.gray, lineWidth: 2)
-            .frame(width: 15, height: 15)
-            .background(isSelected ? .green : .white)
+        RoundedRectangle(cornerRadius: 3)
+            .stroke(componentColor, lineWidth: 1)
+            .frame(width: 13, height: 13)
+            .background(isSelected ? componentColor : .white)
+            .onAppear {
+               convertColor()
+            }
             .onTapGesture {
                 print("Today",today.getFormattedDate())
                 print("DayNumber",dayNumber)
@@ -20,21 +25,26 @@ struct DayGridCell: View {
                 }
             }
     }
+    func convertColor() {
+        guard let hexColor = Color(stringColor) else { return }
+        componentColor = hexColor
+    }
 }
 
 struct TrackerView: View {
     var startDate = Calendar.current.startOfDay(for: Date())
-    @State var habitTitle: String = "Title"
-    @State var habitDesc: String = "Description"
-    @State var habitColor: Color = .green
-    @State var habitIcon: String = "gear"
+    @State var habitTitle: String
+    @State var habitDesc: String
+    @State var habitColor: Color = Color.red
+    @State var habitHexColor: String
+    @State var habitIcon: String
     @State var completedDay = Date()
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.white, lineWidth: 1)
-                .padding()
+            RoundedRectangle(cornerRadius: 15).background(Color.clear)
+                .foregroundColor(Color.clear)
+                .cornerRadius(20)
             
             VStack {
                 HStack {
@@ -75,31 +85,43 @@ struct TrackerView: View {
                 
                 GeometryReader { geometry in
                     ScrollView(.horizontal) {
-                        LazyVStack(spacing: 4) {
+                        LazyVStack(spacing: 0) {
                             ForEach(0..<5, id: \.self) { rowIndex in
-                                LazyHStack(spacing: 8.5) {
+                                LazyHStack(spacing: 0) {
                                     ForEach(0..<73, id: \.self) { columnIndex in
                                         let dayNumber = rowIndex * 73 + columnIndex + 1
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
-                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate)
+                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor)
                                             .frame(width: 20, height: 20)
+                                            .background(Color.clear)
+                                            
                                     }
                                 }
                             }
                         }
                     }
-                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+                    .padding(EdgeInsets(top: -15, leading: 20, bottom: 0, trailing: 0))
                     .frame(width: geometry.size.width - 10, height: geometry.size.height - 40)
                 }
+            }.onAppear {
+                convertColor()
             }
         }
         .frame(width: 400, height: 235)
+        .background(Color.clear)
     }
+    
+    func convertColor() {
+        guard let hexColor = Color(habitHexColor) else { return }
+        habitColor = hexColor
+    }
+    
+   
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackerView()
+        TrackerView(habitTitle: "Title", habitDesc: "Description", habitColor: .red, habitHexColor: "#f542d4", habitIcon: "gear")
     }
 }
