@@ -6,6 +6,7 @@
     <entity name="Habits" representedClassName="Habits" syncable="YES" codeGenerationType="class">
         <attribute name="goalText" optional="YES" attributeType="String" defaultValueString="goals"/>
         <attribute name="habitColor" optional="YES" attributeType="String" defaultValueString="pink"/>
+        <attribute name="habitDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="habitDescription" optional="YES" attributeType="String" defaultValueString="desc"/>
         <attribute name="habitIcon" optional="YES" attributeType="String" defaultValueString="icon"/>
         <attribute name="habitTitle" optional="YES" attributeType="String" defaultValueString="title"/>

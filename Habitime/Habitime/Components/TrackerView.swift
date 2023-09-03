@@ -12,7 +12,7 @@ struct DayGridCell: View {
         RoundedRectangle(cornerRadius: 3)
             .stroke(componentColor, lineWidth: 1)
             .frame(width: 13, height: 13)
-            .background(isSelected ? componentColor : .white)
+            .background(selectedDays.contains(dayNumber) ? componentColor : .white)
             .onAppear {
                 convertColor()
             }
@@ -39,7 +39,6 @@ struct DayGridCell: View {
 }
 
 struct TrackerView: View {
-    var startDate = Calendar.current.startOfDay(for: Date())
     @State var habitTitle: String
     @State var habitDesc: String
     @State var habitColor: Color = Color.red
@@ -47,6 +46,7 @@ struct TrackerView: View {
     @State var habitIcon: String
     @State var completedDay = Date()
     @State var selectedDays: [Int] = []
+    var startDate: Date
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15).background(Color.clear)
@@ -122,6 +122,7 @@ struct TrackerView: View {
     func convertColor() {
         guard let hexColor = Color(habitHexColor) else { return }
         habitColor = hexColor
+        print("Date",startDate)
     }
     
     
@@ -129,6 +130,6 @@ struct TrackerView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackerView(habitTitle: "Title", habitDesc: "Description", habitColor: .red, habitHexColor: "#f542d4", habitIcon: "gear")
+        TrackerView(habitTitle: "Title", habitDesc: "Description", habitColor: .red, habitHexColor: "#f542d4", habitIcon: "gear", startDate: Date())
     }
 }

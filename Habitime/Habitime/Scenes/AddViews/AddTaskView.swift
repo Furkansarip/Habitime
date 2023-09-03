@@ -41,7 +41,7 @@ struct AddTaskView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             ViewThatFits {
                 ScrollView {
                     VStack(alignment: .leading) {
@@ -206,7 +206,8 @@ struct AddTaskView: View {
                                         print("goal", goalText)
                                         print("color", stringColor)
                                         print("Icon",iconStore.selectedIconName)
-                                        CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, goalText: goalText, habitIcon: iconStore.selectedIconName, habitColor: stringColor, context: managedObj)
+                                        
+                                        CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, goalText: goalText, habitIcon: iconStore.selectedIconName, habitColor: stringColor, habitDate: Date(), context: managedObj)
                                         //presentationMode.wrappedValue.dismiss()
                                     }
                                 }.alert(isPresented: $showingAlert) {

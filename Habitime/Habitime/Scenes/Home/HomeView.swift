@@ -12,14 +12,13 @@ struct HomeView: View {
     @Environment(\.managedObjectContext) var managedObject
     @FetchRequest(sortDescriptors:[]) var goals: FetchedResults<Habits>
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .center) {
                 if goals.count > 0 {
                     List(goals) { goal in
                         Section {
-                            
-                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x").padding(EdgeInsets(top: -25, leading: -15, bottom: -45, trailing: -20)).onTapGesture {
-                                print("qqqq")
+                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x", startDate: goal.habitDate ?? Date()).padding(EdgeInsets(top: -25, leading: -15, bottom: -45, trailing: -20)).onTapGesture {
+                                
                             }
                         }
                         
@@ -57,8 +56,6 @@ struct HomeView: View {
                 } ,
                 
                 trailing: Button {
-                    
-                    
                     
                 } label: {
                     NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
