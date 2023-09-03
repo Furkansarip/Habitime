@@ -8,6 +8,8 @@ struct DayGridCell: View {
     @State var stringColor: String
     @State var componentColor: Color = .gray
     @Binding var selectedDays: [Int]
+    @State var singleHabit: Habits?
+    @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
             .stroke(componentColor, lineWidth: 1)
@@ -21,16 +23,39 @@ struct DayGridCell: View {
                 print("DayNumber",dayNumber)
                 print("SelectedDate ",selectedDay.getFormattedDate())
                 isSelected.toggle()
-                if isSelected {
+               /* if isSelected {
                     selectedDays.append(dayNumber)
-                    print("True",selectedDays)// Seçilen günleri diziye ekleyin
+                    print("True",selectedDays)
+                    saveToCoreData(completedDays: selectedDays)
                 } else {
                     if let index = selectedDays.firstIndex(of: dayNumber) {
                         selectedDays.remove(at: index)
-                        print("f",selectedDays)// Seçilen günleri diziye ekleyin// Seçilen günleri diziden kaldırın
-                                            }
+                        print("f",selectedDays)
+                        saveToCoreData(completedDays: selectedDays)
+                    }
+                } */
+                if selectedDays.contains(dayNumber) {
+                    if let index = selectedDays.firstIndex(of: dayNumber) {
+                        selectedDays.remove(at: index)
+                        print("f",selectedDays)
+                        saveToCoreData(completedDays: selectedDays)
+                    }
+                } else {
+                    selectedDays.append(dayNumber)
+                    saveToCoreData(completedDays: selectedDays)
+                }
+                func saveToCoreData(completedDays: [Int]) {
+                    singleHabit?.completedDays = completedDays
+                    
+                    do {
+                        try managedObject.save()
+                     
+                    } catch {
+                        print("Error saving to Core Data: \(error)")
+                    }
                 }
             }
+        
     }
     func convertColor() {
         guard let hexColor = Color(stringColor) else { return }
@@ -47,6 +72,8 @@ struct TrackerView: View {
     @State var completedDay = Date()
     @State var selectedDays: [Int] = []
     var startDate: Date
+    @State var habit: Habits?
+    @State var completedDays: [Int]
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15).background(Color.clear)
@@ -99,7 +126,7 @@ struct TrackerView: View {
                                         let dayNumber = rowIndex * 73 + columnIndex + 1
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
-                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays)
+                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit)
                                             .frame(width: 20, height: 20)
                                             .background(Color.clear)
                                         
@@ -122,7 +149,7 @@ struct TrackerView: View {
     func convertColor() {
         guard let hexColor = Color(habitHexColor) else { return }
         habitColor = hexColor
-        print("Date",startDate)
+        selectedDays = completedDays
     }
     
     
@@ -130,6 +157,6 @@ struct TrackerView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackerView(habitTitle: "Title", habitDesc: "Description", habitColor: .red, habitHexColor: "#f542d4", habitIcon: "gear", startDate: Date())
+        TrackerView(habitTitle: "Title", habitDesc: "Description", habitColor: .red, habitHexColor: "#f542d4", habitIcon: "gear", startDate: Date(), completedDays: [])
     }
 }

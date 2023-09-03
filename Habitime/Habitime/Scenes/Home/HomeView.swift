@@ -11,13 +11,14 @@ import CoreData
 struct HomeView: View {
     @Environment(\.managedObjectContext) var managedObject
     @FetchRequest(sortDescriptors:[]) var goals: FetchedResults<Habits>
+    @State var completed = [Int]()
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
                 if goals.count > 0 {
                     List(goals) { goal in
                         Section {
-                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x", startDate: goal.habitDate ?? Date()).padding(EdgeInsets(top: -25, leading: -15, bottom: -45, trailing: -20)).onTapGesture {
+                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x", startDate: goal.habitDate ?? Date(), habit: goal, completedDays: goal.completedDays ?? [20] ).padding(EdgeInsets(top: -25, leading: -15, bottom: -45, trailing: -20)).onTapGesture {
                                 
                             }
                         }

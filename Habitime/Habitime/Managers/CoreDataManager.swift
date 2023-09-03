@@ -28,7 +28,7 @@ final class CoreDataManager: ObservableObject {
         }
     }
     
-    func saveHabits(title: String, description: String, goalText: String, habitIcon: String, habitColor: String, habitDate: Date, context: NSManagedObjectContext) {
+    func saveHabits(title: String, description: String, goalText: String, habitIcon: String, habitColor: String, habitDate: Date, completedDays: [Int] = [], context: NSManagedObjectContext) {
         let habit = Habits(context: context)
         habit.habitTitle = title
         habit.habitDescription = description
@@ -36,6 +36,7 @@ final class CoreDataManager: ObservableObject {
         habit.habitIcon = habitIcon
         habit.habitColor = habitColor
         habit.habitDate = habitDate
+        habit.completedDays = completedDays
         save(context: context)
     }
     
