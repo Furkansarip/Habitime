@@ -24,22 +24,17 @@ struct HomeView: View {
                         }
                         
                     }
-                    .frame(width: 405)
+                    .frame(width: 415)
                     .listStyle(.insetGrouped)
-                    
                     
                 } else {
                     Image("man")
                     NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
                         Image("plus2").frame(width: 40, height: 40).border(.gray, width: 2).foregroundColor(.pink).background(Color.gray.opacity(0.7)).cornerRadius(10)
                     }
-                    
-                    
                     Text("Alışkanlık bulunamadı + düğmesine dokun")
                     Text("Yeni Alışkanlık ekle").font(.callout)
                 }
-                
-                
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -57,10 +52,10 @@ struct HomeView: View {
                 } ,
                 
                 trailing: Button {
-                    
+                 
                 } label: {
-                    NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
-                        Image(systemName: "plus").foregroundColor(.pink).bold()
+                   NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
+                    Image(systemName: "plus").foregroundColor(.pink).bold()
                     }
                     
                 })

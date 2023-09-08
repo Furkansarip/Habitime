@@ -19,6 +19,7 @@ struct AddTaskView: View {
     @State var reminderText: String
     @State var selectedTitle: String = ""
     @State var colorPickerPresented = false
+    @State var selectedIcon = ""
     @State private var goalPickerPresented = false
     @State private var dayPickerPresented = false
     @State private var iconPresented = false
@@ -28,7 +29,7 @@ struct AddTaskView: View {
     @State private var showingAlert = false
     @State private var showingErrorAlert = false
     @State private var showingSuccessAlert = false
-    @State private var stringColor = ""
+    @State private var stringColor = "#5755D6"
     @EnvironmentObject var iconStore: IconStore
     @Environment (\.managedObjectContext) var managedObj
     
@@ -84,7 +85,7 @@ struct AddTaskView: View {
                             }//Hedef
                             VStack(alignment: .leading) {
                                 Text("Hatırlatıcı").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                                TextField("Seçim Yapın", text: $reminderText)
+                               TextField("Seçim Yapın", text: $reminderText)
                                     .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                     .frame(height: 40)
                                     .background(Color.gray.opacity(0.2).cornerRadius(10))
@@ -107,9 +108,11 @@ struct AddTaskView: View {
                             ForEach(firstColorSet, id: \.self) { color in
                                 Button {
                                     changedColor = color
-                                    stringColor = "\(color)"
+                                    
                                     withAnimation(Animation.easeInOut) {
                                         selectedColor = color
+                                        stringColor = color.toHex() ?? ""
+                                        print("COL", stringColor)
                                     }
                                     debugPrint(color)
                                 } label: {
@@ -124,9 +127,11 @@ struct AddTaskView: View {
                             ForEach(secondColorSet, id: \.self) { color in
                                 Button {
                                     changedColor = color
-                                    stringColor = "\(color)"
+                                    
                                     withAnimation(Animation.easeInOut) {
                                         selectedColor = color
+                                        stringColor = color.toHex() ?? ""
+                                        
                                     }
                                     debugPrint(color)
                                 } label: {
@@ -141,8 +146,8 @@ struct AddTaskView: View {
                             Spacer()
                             Text("Özel Renk")
                             ColorPicker("", selection: $selectedColor)
-                                                .frame(width: 20)
-                                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 30))
+                                .frame(width: 20)
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 30))
                            
                             
                         }
@@ -164,10 +169,13 @@ struct AddTaskView: View {
                                     }.onChange(of: selectedTitle, perform: { newValue in
                                         if newValue != "" {
                                             iconPresented = true
+                                            selectedIcon = iconStore.selectedIconName
                                         }
                                     })
-                                    .sheet(isPresented: $iconPresented) {
-                                        IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor)
+                                    .sheet(isPresented: $iconPresented, onDismiss: {
+                                        selectedIcon = iconStore.selectedIconName
+                                    }) {
+                                        IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor, isPresented: $iconPresented)
                                             .presentationDetents([.fraction(0.3)])
                                             .presentationDragIndicator(.visible)
                                     }
@@ -182,33 +190,37 @@ struct AddTaskView: View {
                                             selectedTitle = title
                                             print("taskview",selectedTitle)
                                             iconPresented = true
+                                            
                                         }
                                     } label: {
                                         CategoryButton(buttonTitle: title, buttonColor: $selectedColor)
                                         
-                                    }.sheet(isPresented: $iconPresented) {
-                                        IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor)
+                                    }.sheet(isPresented: $iconPresented, onDismiss: {
+                                        selectedIcon = iconStore.selectedIconName
+                                    }) {
+                                        IconPickerView(selectedIcon: Constant.IconSet(rawValue: selectedTitle) ?? .other, selectedColor: selectedColor, isPresented: $iconPresented)
                                             .presentationDetents([.fraction(0.3)])
                                             .presentationDragIndicator(.visible)
+                                       
                                     }
                                     Spacer()
                                 }
                             }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: paddingValue, trailing: 0))
                             VStack {
-                                
+                                HStack {
+                                    Text("Seçili Icon:")
+                                    Image(systemName: selectedIcon.isEmpty ? "questionmark.circle.fill" : selectedIcon)
+                                        .foregroundColor(selectedColor)
+                                        .font(.system(size: 16))
+                                    
+                                }.padding(EdgeInsets(top: -5, leading: paddingValue, bottom: 13, trailing: 0))
                                 Button("Alışkanlık Ekle") {
                                     if habitTitle.isEmpty || habitDescription.isEmpty || goalText.isEmpty || reminderText.isEmpty || iconStore.selectedIconName.isEmpty {
                                         showingAlert = true
-                                        print("color", stringColor)
-                                    } else {
-                                        print("Habititle", habitTitle)
-                                        print("desc", habitDescription)
-                                        print("goal", goalText)
-                                        print("color", stringColor)
-                                        print("Icon",iconStore.selectedIconName)
                                         
+                                    } else {
                                         CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, goalText: goalText, habitIcon: iconStore.selectedIconName, habitColor: stringColor, habitDate: Date(), context: managedObj)
-                                        //presentationMode.wrappedValue.dismiss()
+                                      
                                     }
                                 }.alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Boş Alan bırakılamaz!"), message: Text("Lütfen gerekli alanları doldurun."), dismissButton: .default(Text("Tamam")))
@@ -226,9 +238,6 @@ struct AddTaskView: View {
                         
                     }
                 }
-            }.onReceive(Just(selectedColor)) { newColor in
-                stringColor = "\(selectedColor.toHex() ?? "")"
-                print(stringColor)
             }
             
             

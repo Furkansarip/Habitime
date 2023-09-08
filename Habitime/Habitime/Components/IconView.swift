@@ -11,6 +11,7 @@ struct IconView: View {
     @State var iconName: String = "star.fill"
     @EnvironmentObject var selectedIcon: IconStore
     @State var iconColor: Color = .indigo
+    @Binding var isSelectedIcon: Bool
     var body: some View {
         ZStack {
             Rectangle()
@@ -21,6 +22,7 @@ struct IconView: View {
             Button {
                 print(iconName)
                 selectedIcon.selectedIconName = iconName
+                isSelectedIcon = false
             } label: {
                 Image(systemName: iconName)
                     .font(.system(size: 22))

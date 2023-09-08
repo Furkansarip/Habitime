@@ -63,7 +63,7 @@ struct DayPickerView: View {
                 DatePicker("Zaman Seç", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .labelsHidden()
                     .datePickerStyle(.compact)
-            }.padding(.horizontal, 8)
+            }.padding(.horizontal, 17)
             
             
             
@@ -75,7 +75,12 @@ struct DayPickerView: View {
             reminderText = "Everyday \(selectedTime.getCurrentTime())"
         } else {
             let selectedDaysText = selectedButtons.isEmpty ? "" : selectedButtons.joined(separator: ", ")
-            reminderText = "\(selectedDaysText) \(selectedTime.getCurrentTime())"
+            if selectedButtons.isEmpty {
+                reminderText = ""
+            } else {
+                reminderText = "\(selectedDaysText) \(selectedTime.getCurrentTime())"
+            }
+            
         }
         
     }

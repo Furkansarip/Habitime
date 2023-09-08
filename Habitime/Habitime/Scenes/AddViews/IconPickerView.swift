@@ -11,20 +11,18 @@ struct IconPickerView: View {
     @State var selectedIcon: Constant.IconSet
     @State var selectedColor: Color = .red
     @State var iconSet = [String]()
+    @Binding var isPresented: Bool
     var body: some View {
         
         VStack {
             Text("Choose a Icon").font(.title)
             LazyVGrid(columns: [GridItem(.fixed(20)), GridItem(.fixed(80)), GridItem(.fixed(20)), GridItem(.fixed(80)), GridItem(.fixed(20))], spacing: 5) {
                 ForEach(iconSet, id: \.self) { icon in
-                    
-                    IconView(iconName: icon, iconColor: selectedColor)
-                    
+                    IconView(iconName: icon, iconColor: selectedColor, isSelectedIcon: $isPresented)
                 }
             }
             
         }.onAppear {
-            print("ff",selectedIcon)
             drawIconSet()
         }
     }
@@ -51,6 +49,6 @@ struct IconPickerView: View {
 
 struct IconPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        IconPickerView(selectedIcon: .food)
+        IconPickerView(selectedIcon: .food, isPresented: .constant(true))
     }
 }

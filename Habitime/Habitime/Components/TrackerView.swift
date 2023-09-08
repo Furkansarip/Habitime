@@ -119,7 +119,7 @@ struct TrackerView: View {
                 
                 GeometryReader { geometry in
                     ScrollView(.horizontal) {
-                        LazyVStack(spacing: 0) {
+                        LazyVStack(spacing: -3) {
                             ForEach(0..<5, id: \.self) { rowIndex in
                                 LazyHStack(spacing: 0) {
                                     ForEach(0..<73, id: \.self) { columnIndex in
@@ -127,7 +127,7 @@ struct TrackerView: View {
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
                                         DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit)
-                                            .frame(width: 20, height: 20)
+                                            .frame(width: 18, height: 20)
                                             .background(Color.clear)
                                         
                                     }
@@ -142,7 +142,7 @@ struct TrackerView: View {
                 convertColor()
             }
         }
-        .frame(width: 400, height: 235)
+        .frame(width: 400, height: 205)
         .background(habitColor.opacity(0.2))
     }
     
