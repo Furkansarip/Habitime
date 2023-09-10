@@ -29,6 +29,7 @@
 		74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */; };
 		74CE281E2A9F736C00B24C7B /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281D2A9F736C00B24C7B /* TrackerView.swift */; };
 		74DC29572AACADB500681B12 /* DayGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC29562AACADB500681B12 /* DayGridCell.swift */; };
+		74DC29592AADE63900681B12 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC29582AADE63900681B12 /* CalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		74CE281D2A9F736C00B24C7B /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		74DC29562AACADB500681B12 /* DayGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayGridCell.swift; sourceTree = "<group>"; };
+		74DC29582AADE63900681B12 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				74CE27E92A90FF4D00B24C7B /* IconView.swift */,
 				74CE28152A9A1CB800B24C7B /* SubscribeView.swift */,
 				74DC29562AACADB500681B12 /* DayGridCell.swift */,
+				74DC29582AADE63900681B12 /* CalendarView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				74CE28142A9A136700B24C7B /* SettingSideView.swift in Sources */,
 				74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */,
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
+				74DC29592AADE63900681B12 /* CalendarView.swift in Sources */,
 				74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */,
 				74CE27E82A90F96700B24C7B /* IconPickerView.swift in Sources */,
 				74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */,

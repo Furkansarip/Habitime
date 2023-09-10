@@ -14,6 +14,8 @@ struct TrackerView: View {
     @State var habit: Habits?
     @State var completedDays: [Int]
     @State var controlIcon = "checkmark"
+    @State var visiblePicker = false
+    @State private var selectedCalendarDates: [Date] = []
     @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         ZStack {
@@ -55,7 +57,11 @@ struct TrackerView: View {
                             }
                         }
                         .onTapGesture {
-                            print("calendar")
+                            visiblePicker = true
+                        }.sheet(isPresented: $visiblePicker) {
+                            CalendarView(selectedDates: $selectedCalendarDates)
+                                .presentationDetents([.fraction(0.5)])
+                                .presentationDragIndicator(.visible)
                         }
                         
                     
