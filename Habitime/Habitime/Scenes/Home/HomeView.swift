@@ -10,24 +10,33 @@ import CoreData
 
 struct HomeView: View {
     @Environment(\.managedObjectContext) var managedObject
-    @FetchRequest(sortDescriptors:[]) var goals: FetchedResults<Habits>
+    @FetchRequest(sortDescriptors:[]) var habits: FetchedResults<Habits>
     @State var completed = [Int]()
+    @State var detailStatus: Bool = false
+    @State var detail: FetchedResults<Habits>.Element?
+   
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center) {
-                if goals.count > 0 {
-                    List(goals) { goal in
-                        Section {
-                            TrackerView(habitTitle: goal.habitTitle ?? "", habitDesc: goal.habitDescription ?? "", habitHexColor: goal.habitColor ?? "#FFF", habitIcon: goal.habitIcon ?? "x", startDate: goal.habitDate ?? Date(), habit: goal, completedDays: goal.completedDays ?? [20] ).padding(EdgeInsets(top: -25, leading: -15, bottom: -45, trailing: -20)).onTapGesture {
-                                
+            VStack() {
+                if habits.count > 0 {
+                    ZStack {
+                        List(habits) { habit in
+                            Section {
+                                TrackerView(habitTitle: habit.habitTitle ?? "", habitDesc: habit.habitDescription ?? "", habitHexColor: habit.habitColor ?? "#FFF", habitIcon: habit.habitIcon ?? "x", startDate: habit.habitDate ?? Date(), habit: habit, completedDays: habit.completedDays ?? [20] ).padding(EdgeInsets(top: -15, leading: 0, bottom: -25, trailing: 0)).onTapGesture {
+                                    detailStatus = true
+                                    detail = habit
+                                }
+                               
                             }
                         }
                         
+                        .frame(width: 415)
+                        .listStyle(.insetGrouped)
+                        
                     }
-                    .frame(width: 415)
-                    .listStyle(.insetGrouped)
-                    
-                } else {
+                }
+                
+                else {
                     Image("man")
                     NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
                         Image("plus2").frame(width: 40, height: 40).border(.gray, width: 2).foregroundColor(.pink).background(Color.gray.opacity(0.7)).cornerRadius(10)

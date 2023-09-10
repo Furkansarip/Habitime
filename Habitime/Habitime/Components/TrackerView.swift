@@ -1,68 +1,5 @@
 import SwiftUI
 
-struct DayGridCell: View {
-    var dayNumber: Int
-    let today = Date()
-    @State var isSelected = false
-    @State var selectedDay: Date
-    @State var stringColor: String
-    @State var componentColor: Color = .gray
-    @Binding var selectedDays: [Int]
-    @State var singleHabit: Habits?
-    @Environment(\.managedObjectContext) var managedObject
-    var body: some View {
-        RoundedRectangle(cornerRadius: 3)
-            .stroke(componentColor, lineWidth: 1)
-            .frame(width: 13, height: 13)
-            .background(selectedDays.contains(dayNumber) ? componentColor : .white)
-            .onAppear {
-                convertColor()
-            }
-            .onTapGesture {
-                print("Today",today.getFormattedDate())
-                print("DayNumber",dayNumber)
-                print("SelectedDate ",selectedDay.getFormattedDate())
-                isSelected.toggle()
-               /* if isSelected {
-                    selectedDays.append(dayNumber)
-                    print("True",selectedDays)
-                    saveToCoreData(completedDays: selectedDays)
-                } else {
-                    if let index = selectedDays.firstIndex(of: dayNumber) {
-                        selectedDays.remove(at: index)
-                        print("f",selectedDays)
-                        saveToCoreData(completedDays: selectedDays)
-                    }
-                } */
-                if selectedDays.contains(dayNumber) {
-                    if let index = selectedDays.firstIndex(of: dayNumber) {
-                        selectedDays.remove(at: index)
-                        print("f",selectedDays)
-                        saveToCoreData(completedDays: selectedDays)
-                    }
-                } else {
-                    selectedDays.append(dayNumber)
-                    saveToCoreData(completedDays: selectedDays)
-                }
-                func saveToCoreData(completedDays: [Int]) {
-                    singleHabit?.completedDays = completedDays
-                    
-                    do {
-                        try managedObject.save()
-                     
-                    } catch {
-                        print("Error saving to Core Data: \(error)")
-                    }
-                }
-            }
-        
-    }
-    func convertColor() {
-        guard let hexColor = Color(stringColor) else { return }
-        componentColor = hexColor
-    }
-}
-
 struct TrackerView: View {
     @State var habitTitle: String
     @State var habitDesc: String
@@ -71,9 +8,13 @@ struct TrackerView: View {
     @State var habitIcon: String
     @State var completedDay = Date()
     @State var selectedDays: [Int] = []
+    @State var datePickerVisible = false
+    @State var selectedCalendarDays = [Date]()
     var startDate: Date
     @State var habit: Habits?
     @State var completedDays: [Int]
+    @State var controlIcon = "checkmark"
+    @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15).background(Color.clear)
@@ -82,41 +23,82 @@ struct TrackerView: View {
             
             VStack {
                 HStack {
-                    Rectangle().frame(width: 40, height: 43)
+                    Rectangle().frame(width: 40, height: 40)
                         .cornerRadius(12)
                         .foregroundColor(habitColor)
                         .overlay {
                             Image(systemName: habitIcon)
-                                .resizable()
+                                .imageScale(.large)
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 20)
                         }
                     
                     
                     VStack(alignment: .leading) {
-                        Text(habitTitle)
-                        Text(habitDesc)
+                        Text(habitTitle).font(.title2)
+                        Text(habitDesc).font(.system(size: 14)).fontWeight(.light)
                     }
                     
                     Spacer()
-                    
-                    Rectangle().frame(width: 40, height: 40)
+                    Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
-                        .foregroundColor(habitColor)
+                        .foregroundColor(habitColor.opacity(0.7))
+                        .overlay {
+                            Button {
+                                print("Calendar")
+                            } label: {
+                                Image(systemName: "calendar")
+                                    .bold()
+                                    .imageScale(.medium)
+                                    .foregroundColor(.white)
+                                    .frame(width: 44, height: 44)
+                            }
+                        }
+                        .onTapGesture {
+                            print("calendar")
+                        }
+                        
+                    
+                    Rectangle().frame(width: 35, height: 35)
+                        .cornerRadius(12)
+                        .foregroundColor(habitColor.opacity(0.7))
+                        .overlay {
+                            Button {
+                                print("Xmark")
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .bold()
+                                    .imageScale(.medium)
+                                    .foregroundColor(.white)
+                                    .frame(width: 44, height: 44)
+                            }
+                        }.onTapGesture {
+                            print("Xmark")
+                        }
+                    Rectangle().frame(width: 35, height: 35)
+                        .cornerRadius(12)
+                        .foregroundColor(habitColor.opacity(0.7))
                         .overlay {
                             Button {
                                 print(selectedDays)
                             } label: {
-                                Image(systemName: "checkmark")
-                                    .resizable()
+                                Image(systemName: "\(controlIcon)")
+                                    .bold()
+                                    .imageScale(.medium)
                                     .foregroundColor(.white)
-                                    .frame(width: 25, height: 20)
+                                    .frame(width: 44, height: 44)
                             }
+                        }.onTapGesture {
+                            print("check")
+                            selectedDays.append(5)
+                            saveToCoreData(completedDays: selectedDays)
+                            print(selectedDays.sorted())
+                            
                         }
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 25))
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
                 }
-                .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
-                
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 0))
+               
                 GeometryReader { geometry in
                     ScrollView(.horizontal) {
                         LazyVStack(spacing: -3) {
@@ -136,13 +118,14 @@ struct TrackerView: View {
                         }
                     }
                     .padding(EdgeInsets(top: -22, leading: 20, bottom: 0, trailing: 0))
-                    .frame(width: geometry.size.width - 10, height: geometry.size.height - 40)
+                    .frame(width: geometry.size.width - 20, height: geometry.size.height - 5)
                 }
+                
             }.onAppear {
                 convertColor()
             }
         }
-        .frame(width: 400, height: 205)
+        .frame(width: 400, height: 170)
         .background(habitColor.opacity(0.2))
     }
     
@@ -152,7 +135,15 @@ struct TrackerView: View {
         selectedDays = completedDays
     }
     
-    
+    func saveToCoreData(completedDays: [Int]) {
+        habit?.completedDays = completedDays
+        do {
+            try managedObject.save()
+            
+        } catch {
+            print("Error saving to Core Data: \(error)")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

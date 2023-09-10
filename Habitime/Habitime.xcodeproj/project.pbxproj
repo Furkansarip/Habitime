@@ -28,6 +28,7 @@
 		74CE28162A9A1CB800B24C7B /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE28152A9A1CB800B24C7B /* SubscribeView.swift */; };
 		74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */; };
 		74CE281E2A9F736C00B24C7B /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE281D2A9F736C00B24C7B /* TrackerView.swift */; };
+		74DC29572AACADB500681B12 /* DayGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DC29562AACADB500681B12 /* DayGridCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		74CE28152A9A1CB800B24C7B /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 		74CE281B2A9BA1A000B24C7B /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		74CE281D2A9F736C00B24C7B /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
+		74DC29562AACADB500681B12 /* DayGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayGridCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				74CE27D92A8D48EE00B24C7B /* DayButton.swift */,
 				74CE27E92A90FF4D00B24C7B /* IconView.swift */,
 				74CE28152A9A1CB800B24C7B /* SubscribeView.swift */,
+				74DC29562AACADB500681B12 /* DayGridCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -123,6 +126,7 @@
 		74CE27D02A878B3600B24C7B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				74DC29532AAC802F00681B12 /* Detail */,
 				74CE27E62A90E14900B24C7B /* Home */,
 				74CE27E52A90DE6600B24C7B /* AddViews */,
 			);
@@ -172,6 +176,13 @@
 				74CE27EC2A96260500B24C7B /* CoreDataManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		74DC29532AAC802F00681B12 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +270,7 @@
 				74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */,
 				74CE27DC2A8D49C900B24C7B /* DayPickerView.swift in Sources */,
 				74CE27D42A89401400B24C7B /* GoalPickerView.swift in Sources */,
+				74DC29572AACADB500681B12 /* DayGridCell.swift in Sources */,
 				74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */,
 				74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */,
 				74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */,
