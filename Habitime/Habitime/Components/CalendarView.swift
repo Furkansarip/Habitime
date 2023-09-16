@@ -8,39 +8,39 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @Binding var selectedDates: [Date]
+    @Binding var selectedDates: Set<Date>
     @State private var currentDate = Date()
     @State var dates: Set<DateComponents> = []
+    @State var stringDates: Set<Date> = []
     let calendar = Calendar.current
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationView {
             VStack {
-                /*DatePicker("Tarih Seç", selection: $currentDate, in: ...Date(), displayedComponents: .date)
-                 .datePickerStyle(GraphicalDatePickerStyle())
-                 .labelsHidden()
-                 .onChange(of: currentDate) { newValue in
-                 print(newValue)
-                 selectedDates.append(newValue)
-                 
-                 } */
                 MultiDatePicker("", selection: $dates, in: ..<Date.now)
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .labelsHidden()
                     .fixedSize()
                     .onChange(of: dates) { newValue in
+                        convertDateComponentsToDate(newValue)
                         print(newValue)
-                        for singleDate in newValue {
-                            if let date = calendar.date(from: singleDate) {
-                                selectedDates.append(date)
-                                print(selectedDates)
-                            }
-                        }
                     }
+                
             }
             .navigationBarItems(trailing: Button("Kapat") {
                 presentationMode.wrappedValue.dismiss()
             })
+        }
+      
+    }
+    func convertDateComponentsToDate(_ dateComponents: Set<DateComponents>) {
+        let calendar = Calendar.current
+        
+        for dateObject in dateComponents {
+            if let date = calendar.date(from: dateObject) {
+                
+                
+            }
         }
     }
 }

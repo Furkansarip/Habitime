@@ -15,7 +15,7 @@ struct TrackerView: View {
     @State var completedDays: [Int]
     @State var controlIcon = "checkmark"
     @State var visiblePicker = false
-    @State private var selectedCalendarDates: [Date] = []
+    @State private var selectedCalendarDates: Set<Date> = []
     @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         ZStack {
@@ -114,7 +114,7 @@ struct TrackerView: View {
                                         let dayNumber = rowIndex * 73 + columnIndex + 1
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
-                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit)
+                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit, selectedDates: $selectedCalendarDates)
                                             .frame(width: 18, height: 20)
                                             .background(Color.clear)
                                         
