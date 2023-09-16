@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @Binding var selectedDates: Set<Date>
+    @Binding var selectedDates: Set<DateComponents>
+    @State var selectedTempDates: Set<Date> = []
     @State private var currentDate = Date()
     @State var dates: Set<DateComponents> = []
-    @State var stringDates: Set<Date> = []
+    
     let calendar = Calendar.current
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
@@ -23,7 +24,7 @@ struct CalendarView: View {
                     .fixedSize()
                     .onChange(of: dates) { newValue in
                         convertDateComponentsToDate(newValue)
-                        print(newValue)
+                        
                     }
                 
             }
@@ -34,14 +35,8 @@ struct CalendarView: View {
       
     }
     func convertDateComponentsToDate(_ dateComponents: Set<DateComponents>) {
-        let calendar = Calendar.current
+        selectedDates = dates
         
-        for dateObject in dateComponents {
-            if let date = calendar.date(from: dateObject) {
-                
-                
-            }
-        }
     }
 }
 

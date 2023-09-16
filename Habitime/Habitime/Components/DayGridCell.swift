@@ -20,21 +20,22 @@ struct DayGridCell: View {
     @State var formattedArrays: [String] = []
     @State var singleHabit: Habits?
     @State var completeAction = Date()
-    @Binding var selectedDates: Set<Date>
+    @Binding var selectedDates: Set<DateComponents>
+    @State var tempArray: [Date] = []
+    @State var formatedDates: [String] = []
+    @Binding var lastAddedDays: [Int]
     @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
             .stroke(componentColor, lineWidth: 1)
             .frame(width: 13, height: 13)
-            .background(selectedDays.contains(dayNumber) ? componentColor : .white)
+            .background(formatedDates.contains(selectedDay.getFormattedDate()) ? componentColor : .white)
             .onAppear {
                 convertColor()
                 
             }
             .onTapGesture {
-                if selectedDay.getFormattedDate() == formattedArrays[0] {
-                    print("hello")
-                }
+               
                 print("SelectedDays:",selectedDays)
                 
                 isSelected.toggle()
@@ -48,10 +49,10 @@ struct DayGridCell: View {
                     selectedDays.append(dayNumber)
                     saveToCoreData(completedDays: selectedDays)
                 }
-            }/*.onChange(of: selectedDates) { newValue in
+            }.onChange(of: selectedDates) { newValue in
                 
-                formattedDays(selectedDates)
-            }*/
+                formattedDays()
+            }
             
         
     }
@@ -70,26 +71,12 @@ struct DayGridCell: View {
         }
     }
     
-    func formattedDays(_ array: [Date]) {
-        for dates in array {
-            let formattedDate = dates.getFormattedDate()
-            if formattedDate == selectedDay.getFormattedDate() {
-                print("Day Number:", dayNumber)
-                formattedArrays.append(formattedDate)
-                
-                if selectedDays.contains(dayNumber) {
-                    if let index = selectedDays.firstIndex(of: dayNumber) {
-                        selectedDays.remove(at: index)
-                        print("f",selectedDays)
-                        //saveToCoreData(completedDays: selectedDays)
-                    }
-                } else {
-                    selectedDays.append(dayNumber)
-                    //saveToCoreData(completedDays: selectedDays)
-                }
-           
-            }
-        }
+    func formattedDays() {
+        tempArray = selectedDates.map({ d in
+            Calendar.current.date(from: d) ?? Date()
+        })
+        
+        formatedDates = tempArray.map { $0.getFormattedDate() }
     }
     
     
@@ -97,6 +84,6 @@ struct DayGridCell: View {
 
 struct DayGridCell_Previews: PreviewProvider {
     static var previews: some View {
-        DayGridCell(dayNumber: 0, selectedDay: Date(), stringColor: "#FFF", selectedDays: .constant([]), selectedDates: .constant([]))
+        DayGridCell(dayNumber: 0, selectedDay: Date(), stringColor: "#FFF", selectedDays: .constant([]), selectedDates: .constant([]), lastAddedDays: .constant([]))
     }
 }

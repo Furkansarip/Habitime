@@ -15,7 +15,8 @@ struct TrackerView: View {
     @State var completedDays: [Int]
     @State var controlIcon = "checkmark"
     @State var visiblePicker = false
-    @State private var selectedCalendarDates: Set<Date> = []
+    @State private var selectedCalendarDates: Set<DateComponents> = []
+    @State var lastDays: [Int] = []
     @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         ZStack {
@@ -79,7 +80,8 @@ struct TrackerView: View {
                                     .frame(width: 44, height: 44)
                             }
                         }.onTapGesture {
-                            print("Xmark")
+                            let filteredArray = selectedDays.filter { !lastDays.contains($0) }
+                            selectedDays = filteredArray
                         }
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
@@ -114,7 +116,7 @@ struct TrackerView: View {
                                         let dayNumber = rowIndex * 73 + columnIndex + 1
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
-                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit, selectedDates: $selectedCalendarDates)
+                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit, selectedDates: $selectedCalendarDates, lastAddedDays: $lastDays)
                                             .frame(width: 18, height: 20)
                                             .background(Color.clear)
                                         
