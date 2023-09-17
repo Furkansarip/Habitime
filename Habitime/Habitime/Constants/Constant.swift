@@ -23,3 +23,7 @@ struct Constant {
         case other = "Çeşitli"
     }
 }
+
+class HabitData: ObservableObject {
+    @Published var habitSavedArray: [String] = []
+}

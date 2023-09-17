@@ -22,7 +22,7 @@ struct HomeView: View {
                     ZStack {
                         List(habits) { habit in
                             Section {
-                                TrackerView(habitTitle: habit.habitTitle ?? "", habitDesc: habit.habitDescription ?? "", habitHexColor: habit.habitColor ?? "#FFF", habitIcon: habit.habitIcon ?? "x", startDate: habit.habitDate ?? Date(), habit: habit, completedDays: habit.completedDays ?? [20] ).padding(EdgeInsets(top: -15, leading: 0, bottom: -25, trailing: 0)).onTapGesture {
+                                TrackerView(habitTitle: habit.habitTitle ?? "", habitDesc: habit.habitDescription ?? "", habitHexColor: habit.habitColor ?? "#FFF", habitIcon: habit.habitIcon ?? "x", startDate: habit.habitDate ?? Date(), habit: habit, completedDays: habit.completedDays ?? [20], habitDates: habit.formattedDates ?? []).padding(EdgeInsets(top: -15, leading: 0, bottom: -25, trailing: 0)).onTapGesture {
                                     detailStatus = true
                                     detail = habit
                                 }
@@ -61,15 +61,23 @@ struct HomeView: View {
                 } ,
                 
                 trailing: Button {
-                 
+                    /* removeAllObject()*/
+
                 } label: {
-                   NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
+                  NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
                     Image(systemName: "plus").foregroundColor(.pink).bold()
                     }
-                    
+                    //Image(systemName: "plus").foregroundColor(.pink).bold()
                 })
             
         }
+    }
+    
+    func removeAllObject() {
+        for item in habits {
+            managedObject.delete(item)
+        }
+        try? managedObject.save()
     }
     
 }

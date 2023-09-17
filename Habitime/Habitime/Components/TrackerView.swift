@@ -16,8 +16,10 @@ struct TrackerView: View {
     @State var controlIcon = "checkmark"
     @State var visiblePicker = false
     @State private var selectedCalendarDates: Set<DateComponents> = []
-    @State var lastDays: [Int] = []
+    @State var habitDates: [String] = []
     @Environment(\.managedObjectContext) var managedObject
+    @EnvironmentObject var habitData: HabitData
+    @FetchRequest(sortDescriptors:[]) var habits: FetchedResults<Habits>
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15).background(Color.clear)
@@ -59,6 +61,7 @@ struct TrackerView: View {
                         }
                         .onTapGesture {
                             visiblePicker = true
+                            controlRequest()
                         }.sheet(isPresented: $visiblePicker) {
                             CalendarView(selectedDates: $selectedCalendarDates)
                                 .presentationDetents([.fraction(0.5)])
@@ -80,8 +83,7 @@ struct TrackerView: View {
                                     .frame(width: 44, height: 44)
                             }
                         }.onTapGesture {
-                            let filteredArray = selectedDays.filter { !lastDays.contains($0) }
-                            selectedDays = filteredArray
+                            
                         }
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
@@ -98,9 +100,7 @@ struct TrackerView: View {
                             }
                         }.onTapGesture {
                             print("check")
-                            selectedDays.append(5)
-                            saveToCoreData(completedDays: selectedDays)
-                            print(selectedDays.sorted())
+                            saveToCoreData(completedDays: habitDates)
                             
                         }
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
@@ -116,7 +116,7 @@ struct TrackerView: View {
                                         let dayNumber = rowIndex * 73 + columnIndex + 1
                                         let currentDate = Calendar.current.date(byAdding: .day, value: dayNumber - 1 , to: startDate)!
                                         
-                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit, selectedDates: $selectedCalendarDates, lastAddedDays: $lastDays)
+                                        DayGridCell(dayNumber: dayNumber, selectedDay: currentDate, stringColor: habitHexColor, selectedDays: $selectedDays, singleHabit: habit, selectedDates: $selectedCalendarDates, formatedDates: $habitDates)
                                             .frame(width: 18, height: 20)
                                             .background(Color.clear)
                                         
@@ -140,17 +140,22 @@ struct TrackerView: View {
     func convertColor() {
         guard let hexColor = Color(habitHexColor) else { return }
         habitColor = hexColor
-        selectedDays = completedDays
+        
     }
-    
-    func saveToCoreData(completedDays: [Int]) {
-        habit?.completedDays = completedDays
+    //MARK: Todo bu günü işaretle sadece
+    func saveToCoreData(completedDays: [String]) {
+        habit?.formattedDates = completedDays
+        
         do {
             try managedObject.save()
             
         } catch {
             print("Error saving to Core Data: \(error)")
         }
+    }
+    
+    func controlRequest() {
+        habitData.habitSavedArray = habit?.formattedDates ?? []
     }
 }
 

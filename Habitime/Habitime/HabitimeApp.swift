@@ -11,11 +11,13 @@ import SwiftUI
 struct HabitimeApp: App {
     let dataManager = CoreDataManager.shared
     let iconStore = IconStore()
+    @StateObject private var sharedData = HabitData()
     var body: some Scene {
         WindowGroup {
             HomeView()
                 .environment(\.managedObjectContext, dataManager.container.viewContext)
                 .environmentObject(iconStore)
+                .environmentObject(sharedData)
             /*TrackerView() */
         }
     }

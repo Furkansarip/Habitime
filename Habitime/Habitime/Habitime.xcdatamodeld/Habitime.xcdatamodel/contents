@@ -4,7 +4,8 @@
         <attribute name="habitName" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Habits" representedClassName="Habits" syncable="YES" codeGenerationType="class">
-        <attribute name="completedDays" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
+        <attribute name="completedDays" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="[Int]"/>
+        <attribute name="formattedDates" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="goalText" optional="YES" attributeType="String" defaultValueString="goals"/>
         <attribute name="habitColor" optional="YES" attributeType="String" defaultValueString="pink"/>
         <attribute name="habitDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

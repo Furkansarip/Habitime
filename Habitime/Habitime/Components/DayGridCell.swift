@@ -11,7 +11,6 @@ import Combine
 struct DayGridCell: View {
     var dayNumber: Int
     let today = Date()
-    @State var result = false
     @State var isSelected = false
     @State var selectedDay: Date
     @State var stringColor: String
@@ -22,8 +21,8 @@ struct DayGridCell: View {
     @State var completeAction = Date()
     @Binding var selectedDates: Set<DateComponents>
     @State var tempArray: [Date] = []
-    @State var formatedDates: [String] = []
-    @Binding var lastAddedDays: [Int]
+    @Binding var formatedDates: [String]
+    @State var tempString: Set<String> = []
     @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
@@ -35,7 +34,7 @@ struct DayGridCell: View {
                 
             }
             .onTapGesture {
-               
+               /*
                 print("SelectedDays:",selectedDays)
                 
                 isSelected.toggle()
@@ -48,12 +47,10 @@ struct DayGridCell: View {
                 } else {
                     selectedDays.append(dayNumber)
                     saveToCoreData(completedDays: selectedDays)
-                }
+                } */
             }.onChange(of: selectedDates) { newValue in
-                
                 formattedDays()
             }
-            
         
     }
     func convertColor() {
@@ -61,8 +58,8 @@ struct DayGridCell: View {
         componentColor = hexColor
     }
     
-    func saveToCoreData(completedDays: [Int]) {
-        singleHabit?.completedDays = completedDays
+    func saveToCoreData(completedDays: [String]) {
+        singleHabit?.formattedDates = completedDays
         do {
             try managedObject.save()
             
@@ -70,20 +67,31 @@ struct DayGridCell: View {
             print("Error saving to Core Data: \(error)")
         }
     }
+     
+
     
     func formattedDays() {
+        guard let savedData = singleHabit?.formattedDates else { return }
         tempArray = selectedDates.map({ d in
-            Calendar.current.date(from: d) ?? Date()
-        })
-        
+             Calendar.current.date(from: d) ?? Date()
+         })
+       
         formatedDates = tempArray.map { $0.getFormattedDate() }
+        formatedDates += savedData
+        
+        
     }
     
-    
+    func checkDays(_ dateComponents: Date) -> Bool {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: dateComponents)
+        return components.day == dayNumber
+    }
 }
 
 struct DayGridCell_Previews: PreviewProvider {
+    
     static var previews: some View {
-        DayGridCell(dayNumber: 0, selectedDay: Date(), stringColor: "#FFF", selectedDays: .constant([]), selectedDates: .constant([]), lastAddedDays: .constant([]))
+        DayGridCell(dayNumber: 0, selectedDay: Date(), stringColor: "#FFF", selectedDays: .constant([]), selectedDates: .constant([]), formatedDates: .constant([]))
     }
 }
