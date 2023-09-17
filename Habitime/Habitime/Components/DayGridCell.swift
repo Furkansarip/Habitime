@@ -19,7 +19,7 @@ struct DayGridCell: View {
     @State var formattedArrays: [String] = []
     @State var singleHabit: Habits?
     @State var completeAction = Date()
-    @Binding var selectedDates: Set<DateComponents>
+    @Binding var selectedDates: [String]
     @State var tempArray: [Date] = []
     @Binding var formatedDates: [String]
     @State var tempString: Set<String> = []
@@ -33,22 +33,7 @@ struct DayGridCell: View {
                 convertColor()
                 
             }
-            .onTapGesture {
-               /*
-                print("SelectedDays:",selectedDays)
-                
-                isSelected.toggle()
-                if selectedDays.contains(dayNumber) {
-                    if let index = selectedDays.firstIndex(of: dayNumber) {
-                        selectedDays.remove(at: index)
-                        print("f",selectedDays)
-                        saveToCoreData(completedDays: selectedDays)
-                    }
-                } else {
-                    selectedDays.append(dayNumber)
-                    saveToCoreData(completedDays: selectedDays)
-                } */
-            }.onChange(of: selectedDates) { newValue in
+            .onChange(of: selectedDates) { newValue in
                 formattedDays()
             }
         
@@ -71,22 +56,11 @@ struct DayGridCell: View {
 
     
     func formattedDays() {
-        guard let savedData = singleHabit?.formattedDates else { return }
-        tempArray = selectedDates.map({ d in
-             Calendar.current.date(from: d) ?? Date()
-         })
-       
-        formatedDates = tempArray.map { $0.getFormattedDate() }
-        formatedDates += savedData
         
-        
+        formatedDates = selectedDates
+        saveToCoreData(completedDays: formatedDates)
     }
     
-    func checkDays(_ dateComponents: Date) -> Bool {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: dateComponents)
-        return components.day == dayNumber
-    }
 }
 
 struct DayGridCell_Previews: PreviewProvider {

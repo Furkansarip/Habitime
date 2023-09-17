@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @Binding var selectedDates: Set<DateComponents>
+    @Binding var selectedDates: [String]
     @State var selectedTempDates: Set<Date> = []
     @State private var currentDate = Date()
     @State var dates: Set<DateComponents> = []
+    @State var difDates: Set<String> = []
     @State var lastArray: [String] = []
+    @State var startedCount = 0
+    @State var newCount = 0
+    @State var selectedHabit: Habits?
     let formatter = DateFormatter()
     let calendar = Calendar.current
     var stringDate: [String] = []
@@ -25,13 +29,13 @@ struct CalendarView: View {
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .labelsHidden()
                     .fixedSize()
-                    .onAppear {
-                        convertedDates()
-                    }
+                    
                     .onChange(of: dates) { newValue in
-                        formatSelectedDates()
+                       formatSelectedDates()
                     }
-                
+            }
+            .onAppear {
+                convertedDates()
             }
             .navigationBarItems(trailing: Button("Kapat") {
                 presentationMode.wrappedValue.dismiss()
@@ -41,30 +45,20 @@ struct CalendarView: View {
     }
     
     private func formatSelectedDates() {
-        selectedDates = dates
+        
         formatter.dateFormat = "dd.MM.yyy"
-        let dates = selectedDates
+        let dates = dates
             .compactMap { date in
                 Calendar.current.date(from: date)
             }
             .map { date in
                 formatter.string(from: date)
             }
-        lastArray = dates
-        print("saved Array", habitData.habitSavedArray)
-        for dateObject in habitData.habitSavedArray {
-            if !dates.contains(dateObject) {
-                lastArray.append(dateObject)
-                print("Eklendikten sonra: ", lastArray)
-            } else {
-                guard let index = lastArray.firstIndex(of: dateObject) else { return }
-                lastArray.remove(at: index)
-                print("Silindikten sonra: ", lastArray)
-            }
-        }
         
+        selectedDates = dates
+        print("last", selectedDates)
         
-    }
+}
     
     func convertedDates() {
         let dateFormatter = DateFormatter()
@@ -76,13 +70,13 @@ struct CalendarView: View {
             print(dateString)
             if let date = dateFormatter.date(from: dateString) {
                 let calendar = Calendar.current
-                let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+                let dateComponents = calendar.dateComponents([.calendar, .era, .year, .month, .day], from: date)
                 dateComponentsSet.insert(dateComponents)
-                print("datescomp", dateComponentsSet)
+                
             }
         }
         dates = dateComponentsSet
-        print(dates)
+        
     }
     
 }

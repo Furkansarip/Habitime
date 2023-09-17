@@ -15,11 +15,12 @@ struct TrackerView: View {
     @State var completedDays: [Int]
     @State var controlIcon = "checkmark"
     @State var visiblePicker = false
-    @State private var selectedCalendarDates: Set<DateComponents> = []
+    @State private var selectedCalendarDates: [String] = []
     @State var habitDates: [String] = []
     @Environment(\.managedObjectContext) var managedObject
     @EnvironmentObject var habitData: HabitData
     @FetchRequest(sortDescriptors:[]) var habits: FetchedResults<Habits>
+    @State var selectedArrays: Set<DateComponents> = []
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15).background(Color.clear)
@@ -64,7 +65,7 @@ struct TrackerView: View {
                             controlRequest()
                         }.sheet(isPresented: $visiblePicker) {
                             CalendarView(selectedDates: $selectedCalendarDates)
-                                .presentationDetents([.fraction(0.5)])
+                                .presentationDetents([.fraction(0.6)])
                                 .presentationDragIndicator(.visible)
                         }
                         
@@ -142,6 +143,27 @@ struct TrackerView: View {
         habitColor = hexColor
         
     }
+    
+    func convertedDates() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        var dateComponentsSet: Set<DateComponents> = Set()
+        
+        for dateString in habitData.habitSavedArray {
+            print(dateString)
+            if let date = dateFormatter.date(from: dateString) {
+                let calendar = Calendar.current
+                let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+                dateComponentsSet.insert(dateComponents)
+                print("datescomp", dateComponentsSet)
+                
+            }
+        }
+        selectedArrays = dateComponentsSet
+        
+    }
+    
     //MARK: Todo bu günü işaretle sadece
     func saveToCoreData(completedDays: [String]) {
         habit?.formattedDates = completedDays
