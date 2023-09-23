@@ -49,7 +49,13 @@ final class CoreDataManager: ObservableObject {
         save(context: context)
     }
     
-    func deleteHabit(context: NSManagedObjectContext) {
-        
+    func deleteHabit(object: NSManagedObject, context: NSManagedObjectContext) {
+        context.delete(object)
+        do {
+            try context.save()
+            
+        } catch {
+            print("Error saving to Core Data: \(error)")
+        }
     }
 }

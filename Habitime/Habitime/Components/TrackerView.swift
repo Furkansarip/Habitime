@@ -17,6 +17,7 @@ struct TrackerView: View {
     @State var visiblePicker = false
     @State private var selectedCalendarDates: [String] = []
     @State var habitDates: [String] = []
+    @State var deleteAlertVisible: Bool = false
     @Environment(\.managedObjectContext) var managedObject
     @EnvironmentObject var habitData: HabitData
     @FetchRequest(sortDescriptors:[]) var habits: FetchedResults<Habits>
@@ -85,8 +86,22 @@ struct TrackerView: View {
                                     .frame(width: 44, height: 44)
                             }
                         }.onTapGesture {
-                            
-                        }
+                            deleteAlertVisible = true
+                        }.alert(isPresented: $deleteAlertVisible) {
+                            Alert(
+                                title: Text("Silme İşlemi Onayı"),
+                                message: Text("Bu alışkanlığı silmek istediğinize emin misiniz?"),
+                                primaryButton: .default(Text("Evet")) {
+                                    deleteObject()
+                                    print("Evet düğmesine basıldı.")
+                                    deleteAlertVisible = false // Alert'i kapat
+                                },
+                                secondaryButton: .destructive(Text("Hayır")) {
+                                    // "Hayır" düğmesine basıldığında yapılacak işlem
+                                    print("Hayır düğmesine basıldı.")
+                                    deleteAlertVisible = false // Alert'i kapat
+                                }
+                            )                        }
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
                         .foregroundColor(habitColor.opacity(0.8))
@@ -175,6 +190,11 @@ struct TrackerView: View {
         } catch {
             print("Error saving to Core Data: \(error)")
         }
+    }
+    
+    func deleteObject() {
+        guard let object = habit else { return }
+        CoreDataManager.shared.deleteHabit(object: object, context: managedObject)
     }
     
     func controlRequest() {
