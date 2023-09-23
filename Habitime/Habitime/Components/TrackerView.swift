@@ -31,9 +31,10 @@ struct TrackerView: View {
                 HStack {
                     Rectangle().frame(width: 40, height: 40)
                         .cornerRadius(12)
-                        .foregroundColor(habitColor)
+                        .foregroundColor(habitColor.opacity(0.8))
                         .overlay {
                             Image(systemName: habitIcon)
+                                .bold()
                                 .imageScale(.large)
                                 .foregroundColor(.white)
                                 .frame(width: 25, height: 20)
@@ -48,7 +49,7 @@ struct TrackerView: View {
                     Spacer()
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
-                        .foregroundColor(habitColor.opacity(0.7))
+                        .foregroundColor(habitColor.opacity(0.8))
                         .overlay {
                             Button {
                                 print("Calendar")
@@ -72,7 +73,7 @@ struct TrackerView: View {
                     
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
-                        .foregroundColor(habitColor.opacity(0.7))
+                        .foregroundColor(habitColor.opacity(0.8))
                         .overlay {
                             Button {
                                 print("Xmark")
@@ -88,7 +89,7 @@ struct TrackerView: View {
                         }
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
-                        .foregroundColor(habitColor.opacity(0.7))
+                        .foregroundColor(habitColor.opacity(0.8))
                         .overlay {
                             Button {
                                 print(selectedDays)
@@ -136,7 +137,7 @@ struct TrackerView: View {
             }
         }
         .frame(width: 400, height: 170)
-        .background(habitColor.opacity(0.2))
+        .background(habitColor.opacity(0.4))
     }
     
     func convertColor() {

@@ -22,11 +22,10 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             VStack {
-                MultiDatePicker("", selection: $dates, in: Date.now...)
+                MultiDatePicker("", selection: $dates, in: dateRange())
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .labelsHidden()
                     .fixedSize()
-                    
                     .onChange(of: dates) { newValue in
                        formatSelectedDates()
                     }
@@ -34,6 +33,7 @@ struct CalendarView: View {
             
             .onAppear {
                 convertedDates()
+                
             }
             .navigationBarItems(trailing: Button("Kapat") {
                 presentationMode.wrappedValue.dismiss()
@@ -75,6 +75,20 @@ struct CalendarView: View {
         }
         dates = dateComponentsSet
         
+    }
+    
+    func dateRange() -> Range<Date> {
+        let stringDate = selectedHabit?.habitDate ?? Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: stringDate)
+       
+        let start = calendar.date(
+                    from: DateComponents(
+                        year: components.year,
+                        month: components.month,
+                        day: components.day)
+                )!
+        return start..<Date.now
     }
     
     func saveToCoreData(completedDays: [String]) {
