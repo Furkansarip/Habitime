@@ -33,7 +33,7 @@ struct AddTaskView: View {
     @EnvironmentObject var iconStore: IconStore
     @Environment (\.managedObjectContext) var managedObj
     
-    //@Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode
     var firstColorSet: [Color] = Constant.firstColorSet
     var secondColorSet: [Color] = Constant.secondColorSet
     var firstCategorySet: [String] = Constant.firstCategorySet
@@ -220,7 +220,7 @@ struct AddTaskView: View {
                                         
                                     } else {
                                         CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, goalText: goalText, habitIcon: iconStore.selectedIconName, habitColor: stringColor, habitDate: Date(), context: managedObj)
-                                      
+                                        presentationMode.wrappedValue.dismiss()
                                     }
                                 }.alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Boş Alan bırakılamaz!"), message: Text("Lütfen gerekli alanları doldurun."), dismissButton: .default(Text("Tamam")))
