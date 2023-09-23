@@ -20,9 +20,7 @@ struct DayGridCell: View {
     @State var singleHabit: Habits?
     @State var completeAction = Date()
     @Binding var selectedDates: [String]
-    @State var tempArray: [Date] = []
     @Binding var formatedDates: [String]
-    @State var tempString: Set<String> = []
     @Environment(\.managedObjectContext) var managedObject
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
@@ -41,6 +39,7 @@ struct DayGridCell: View {
     func convertColor() {
         guard let hexColor = Color(stringColor) else { return }
         componentColor = hexColor
+        print(selectedDates)
     }
     
     func saveToCoreData(completedDays: [String]) {

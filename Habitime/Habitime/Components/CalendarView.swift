@@ -14,8 +14,6 @@ struct CalendarView: View {
     @State var dates: Set<DateComponents> = []
     @State var difDates: Set<String> = []
     @State var lastArray: [String] = []
-    @State var startedCount = 0
-    @State var newCount = 0
     @State var selectedHabit: Habits?
     let formatter = DateFormatter()
     let calendar = Calendar.current
