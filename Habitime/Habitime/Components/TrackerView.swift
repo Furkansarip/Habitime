@@ -64,7 +64,7 @@ struct TrackerView: View {
                             visiblePicker = true
                             controlRequest()
                         }.sheet(isPresented: $visiblePicker) {
-                            CalendarView(selectedDates: $selectedCalendarDates)
+                            CalendarView(selectedDates: $selectedCalendarDates, selectedHabit: habit)
                                 .presentationDetents([.fraction(0.6)])
                                 .presentationDragIndicator(.visible)
                         }
@@ -101,7 +101,7 @@ struct TrackerView: View {
                             }
                         }.onTapGesture {
                             print("check")
-                            saveToCoreData(completedDays: habitDates)
+                            
                             
                         }
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
@@ -132,6 +132,7 @@ struct TrackerView: View {
                 
             }.onAppear {
                 convertColor()
+                
             }
         }
         .frame(width: 400, height: 170)
@@ -141,7 +142,6 @@ struct TrackerView: View {
     func convertColor() {
         guard let hexColor = Color(habitHexColor) else { return }
         habitColor = hexColor
-        
     }
     
     func convertedDates() {

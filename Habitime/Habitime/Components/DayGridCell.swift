@@ -26,20 +26,17 @@ struct DayGridCell: View {
         RoundedRectangle(cornerRadius: 3)
             .stroke(componentColor, lineWidth: 1)
             .frame(width: 13, height: 13)
-            .background(formatedDates.contains(selectedDay.getFormattedDate()) ? componentColor : .white)
+            .background(selectedDates.contains(selectedDay.getFormattedDate()) ? componentColor : .white)
             .onAppear {
                 convertColor()
-                
             }
-            .onChange(of: selectedDates) { newValue in
-                formattedDays()
-            }
+            
         
     }
     func convertColor() {
         guard let hexColor = Color(stringColor) else { return }
         componentColor = hexColor
-        print(selectedDates)
+        controlDays()
     }
     
     func saveToCoreData(completedDays: [String]) {
@@ -55,9 +52,14 @@ struct DayGridCell: View {
 
     
     func formattedDays() {
-        
         formatedDates = selectedDates
-        saveToCoreData(completedDays: formatedDates)
+    }
+    
+    func controlDays() {
+        if selectedDates.isEmpty {
+            selectedDates = formatedDates
+        }
+       
     }
     
 }
