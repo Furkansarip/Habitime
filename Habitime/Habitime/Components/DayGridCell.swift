@@ -49,12 +49,6 @@ struct DayGridCell: View {
         }
     }
      
-
-    
-    func formattedDays() {
-        formatedDates = selectedDates
-    }
-    
     func controlDays() {
         if selectedDates.isEmpty {
             selectedDates = formatedDates

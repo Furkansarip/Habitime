@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		745909D32AC03FBA007392BC /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909D22AC03FBA007392BC /* EditView.swift */; };
 		74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */; };
 		74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27BA2A83F90B00B24C7B /* HomeView.swift */; };
 		74CE27BD2A83F90C00B24C7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BC2A83F90C00B24C7B /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		745909D22AC03FBA007392BC /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		74CE27B52A83F90B00B24C7B /* Habitime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitimeApp.swift; sourceTree = "<group>"; };
 		74CE27BA2A83F90B00B24C7B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				74CE28152A9A1CB800B24C7B /* SubscribeView.swift */,
 				74DC29562AACADB500681B12 /* DayGridCell.swift */,
 				74DC29582AADE63900681B12 /* CalendarView.swift */,
+				745909D22AC03FBA007392BC /* EditView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				74CE27EA2A90FF4D00B24C7B /* IconView.swift in Sources */,
 				74CE27DA2A8D48EE00B24C7B /* DayButton.swift in Sources */,
+				745909D32AC03FBA007392BC /* EditView.swift in Sources */,
 				74CE281C2A9BA1A000B24C7B /* Color+Ext.swift in Sources */,
 				74CE27E12A90C84000B24C7B /* Date+Ext.swift in Sources */,
 				74CE281E2A9F736C00B24C7B /* TrackerView.swift in Sources */,

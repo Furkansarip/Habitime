@@ -19,6 +19,7 @@ struct HomeView: View {
         NavigationStack {
             VStack() {
                 if habits.count > 0 {
+                    
                     ZStack {
                         List(habits) { habit in
                             Section {

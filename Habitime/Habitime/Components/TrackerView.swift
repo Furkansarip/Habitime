@@ -15,7 +15,7 @@ struct TrackerView: View {
     @State var completedDays: [Int]
     @State var controlIcon = "checkmark"
     @State var visiblePicker = false
-    @State private var selectedCalendarDates: [String] = []
+    @State var selectedCalendarDates: [String] = []
     @State var habitDates: [String] = []
     @State var deleteAlertVisible: Bool = false
     @Environment(\.managedObjectContext) var managedObject
@@ -63,14 +63,16 @@ struct TrackerView: View {
                             }
                         }
                         .onTapGesture {
+                          
                             visiblePicker = true
                             controlRequest()
+                           
                         }.sheet(isPresented: $visiblePicker) {
                             CalendarView(selectedDates: $selectedCalendarDates, selectedHabit: habit)
-                                .presentationDetents([.fraction(0.6)])
-                                .presentationDragIndicator(.visible)
+                                
+                                
+                               
                         }
-                        
                     
                     Rectangle().frame(width: 35, height: 35)
                         .cornerRadius(12)
@@ -153,6 +155,7 @@ struct TrackerView: View {
         }
         .frame(width: 400, height: 170)
         .background(habitColor.opacity(0.4))
+        
     }
     
     func convertColor() {

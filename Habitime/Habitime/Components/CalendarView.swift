@@ -13,6 +13,8 @@ struct CalendarView: View {
     @State var dates: Set<DateComponents> = []
     @State var lastArray: [String] = []
     @State var selectedHabit: Habits?
+    @State var stringColor = ""
+    @State var componentColor : Color = .red
     let formatter = DateFormatter()
     let calendar = Calendar.current
     var stringDate: [String] = []
@@ -22,22 +24,34 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Spacer()
+                //
+               
+                EditView(habitTitle: selectedHabit?.habitTitle ?? "Title", habitDesc: selectedHabit?.habitDescription ?? "Desc", habitHexColor: selectedHabit?.habitColor ?? "#FFF", habitIcon: selectedHabit?.habitIcon ?? "plus", startDate: selectedHabit?.habitDate ?? Date(), selectedCalendarDates: $selectedDates, habitDates: selectedDates)
+                
+                //
                 MultiDatePicker("", selection: $dates, in: dateRange())
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .labelsHidden()
-                    .fixedSize()
+                    .background(componentColor.opacity(0.4), in: RoundedRectangle(cornerRadius: 10))
+                    
                     .onChange(of: dates) { newValue in
                        formatSelectedDates()
+                        //selectedHabit?.formattedDates = selectedDates
                     }
             }
+         
             
             .onAppear {
+                convertColor()
                 convertedDates()
                 
             }
             .navigationBarItems(trailing: Button("Kapat") {
-                presentationMode.wrappedValue.dismiss()
-            })
+                            presentationMode.wrappedValue.dismiss()
+            }.foregroundColor(.red))
+            .backgroundStyle(.clear)
+            
         }
         
     }
@@ -57,7 +71,14 @@ struct CalendarView: View {
         print("last", selectedDates)
         saveToCoreData(completedDays: selectedDates)
         
-}
+    }
+    func convertColor() {
+        stringColor = selectedHabit?.habitColor ?? "#FFF"
+        guard let hexColor = Color(stringColor) else { return }
+        
+        componentColor = hexColor
+        
+    }
     
     func convertedDates() {
         let dateFormatter = DateFormatter()
