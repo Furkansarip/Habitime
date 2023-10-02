@@ -30,7 +30,6 @@ final class CoreDataManager: ObservableObject {
     
     func saveHabits(title: String,
                 description: String,
-                goalText: String,
                 habitIcon: String,
                 habitColor: String,
                 habitDate: Date,
@@ -40,7 +39,6 @@ final class CoreDataManager: ObservableObject {
         let habit = Habits(context: context)
         habit.habitTitle = title
         habit.habitDescription = description
-        habit.goalText = goalText
         habit.habitIcon = habitIcon
         habit.habitColor = habitColor
         habit.habitDate = habitDate

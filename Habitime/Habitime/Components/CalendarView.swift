@@ -31,10 +31,8 @@ struct CalendarView: View {
                 
                 //
                 MultiDatePicker("", selection: $dates, in: dateRange())
-                    .datePickerStyle(GraphicalDatePickerStyle())
+                    .datePickerStyle(.graphical)
                     .labelsHidden()
-                    .background(componentColor.opacity(0.4), in: RoundedRectangle(cornerRadius: 10))
-                    
                     .onChange(of: dates) { newValue in
                        formatSelectedDates()
                         //selectedHabit?.formattedDates = selectedDates
@@ -47,9 +45,13 @@ struct CalendarView: View {
                 convertedDates()
                 
             }
-            .navigationBarItems(trailing: Button("Kapat") {
-                            presentationMode.wrappedValue.dismiss()
-            }.foregroundColor(.red))
+            .navigationBarItems(trailing: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Image(systemName: "xmark.circle").foregroundColor(componentColor)
+                    .bold()
+                    
+            }))
             .backgroundStyle(.clear)
             
         }

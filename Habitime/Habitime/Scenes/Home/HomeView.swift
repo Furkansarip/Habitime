@@ -62,13 +62,13 @@ struct HomeView: View {
                 } ,
                 
                 trailing: Button {
-                    /* removeAllObject()*/
-
+                    /* removeAllObject() */
+                    
                 } label: {
                   NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
                     Image(systemName: "plus").foregroundColor(.pink).bold()
                     }
-                    //Image(systemName: "plus").foregroundColor(.pink).bold()
+                   // Image(systemName: "plus").foregroundColor(.pink).bold()
                 })
             
         }

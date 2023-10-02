@@ -30,6 +30,9 @@ struct AddTaskView: View {
     @State private var showingErrorAlert = false
     @State private var showingSuccessAlert = false
     @State private var stringColor = "#5755D6"
+    @State var hour = 0
+    @State var min = 0
+    @State var notificationDays = [Int]()
     @EnvironmentObject var iconStore: IconStore
     @Environment (\.managedObjectContext) var managedObj
     
@@ -67,7 +70,7 @@ struct AddTaskView: View {
                                 .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 22))
                         }//Açıklama
                         HStack {
-                            VStack(alignment: .leading) {
+                           /* VStack(alignment: .leading) {
                                 Text("Hedef").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
                                 TextField("Seçim Yapın", text: $goalText)
                                     .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
@@ -82,12 +85,13 @@ struct AddTaskView: View {
                                         GoalPickerView(isSheetPresented: $goalPickerPresented, goalText: $goalText).presentationDetents([.fraction(0.35)])
                                             .presentationDragIndicator(.visible)
                                     }
-                            }//Hedef
+                            }//Hedef */
                             VStack(alignment: .leading) {
                                 Text("Hatırlatıcı").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
                                TextField("Seçim Yapın", text: $reminderText)
                                     .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                     .frame(height: 40)
+                                    .lineLimit(1)
                                     .background(Color.gray.opacity(0.2).cornerRadius(10))
                                     .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
                                     .onTapGesture {
@@ -215,11 +219,14 @@ struct AddTaskView: View {
                                     
                                 }.padding(EdgeInsets(top: -5, leading: paddingValue, bottom: 13, trailing: 0))
                                 Button("Alışkanlık Ekle") {
-                                    if habitTitle.isEmpty || habitDescription.isEmpty || goalText.isEmpty || reminderText.isEmpty || iconStore.selectedIconName.isEmpty {
+                                    if habitTitle.isEmpty || habitDescription.isEmpty || reminderText.isEmpty || iconStore.selectedIconName.isEmpty {
                                         showingAlert = true
-                                        
+                                        self.convertHourAndMin()
+                                        self.daysControl()
+                                        NotificationManager.shared.scheduleNotifications(notificationDays, hour: hour, minute: min)
+                                        notificationDays = []
                                     } else {
-                                        CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, goalText: goalText, habitIcon: iconStore.selectedIconName, habitColor: stringColor, habitDate: Date(), context: managedObj)
+                                        CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, habitIcon: iconStore.selectedIconName, habitColor: stringColor, habitDate: Date(), context: managedObj)
                                         presentationMode.wrappedValue.dismiss()
                                     }
                                 }.alert(isPresented: $showingAlert) {
@@ -248,6 +255,41 @@ struct AddTaskView: View {
             
         }
         .offset()
+    }
+    
+    func convertHourAndMin() {
+        let components = reminderText.components(separatedBy: ", ")
+
+        // Son bileşenin saati ve dakikası
+        if let lastComponent = components.last,
+            let hourAndMin = lastComponent.split(separator: " ").last {
+            let hourAndMinComponents = hourAndMin.split(separator: ":")
+            
+            if hourAndMinComponents.count == 2 {
+                hour = Int(hourAndMinComponents[0]) ?? 0
+                min = Int(hourAndMinComponents[1]) ?? 0
+                print("Saat: \(hour)")
+                print("Dakika: \(min)")
+            } else {
+                print("Geçersiz saat formatı")
+            }
+        } else {
+            print("Saat bilgisi bulunamadı")
+        }
+    }
+    
+    func daysControl() {
+        
+        let daysString = reminderText.contains(",") ? reminderText.components(separatedBy: ", ") : reminderText.components(separatedBy: " ")
+        let daysArray = daysString.map { $0.capitalized }
+        for singleDay in daysArray {
+            if Constant.daysDictionary.keys.contains(singleDay) {
+                let value = Constant.daysDictionary[singleDay] ?? 0
+                notificationDays.append(value)
+                print("Notify:", notificationDays)
+            }
+        }
+        
     }
 }
 

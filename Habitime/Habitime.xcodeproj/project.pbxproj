@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		745909D32AC03FBA007392BC /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909D22AC03FBA007392BC /* EditView.swift */; };
+		745909D52ACAF6DA007392BC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909D42ACAF6DA007392BC /* NotificationManager.swift */; };
 		74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */; };
 		74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27BA2A83F90B00B24C7B /* HomeView.swift */; };
 		74CE27BD2A83F90C00B24C7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BC2A83F90C00B24C7B /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		745909D22AC03FBA007392BC /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		745909D42ACAF6DA007392BC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		74CE27B52A83F90B00B24C7B /* Habitime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitimeApp.swift; sourceTree = "<group>"; };
 		74CE27BA2A83F90B00B24C7B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				74CE27EC2A96260500B24C7B /* CoreDataManager.swift */,
+				745909D42ACAF6DA007392BC /* NotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */,
 				74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */,
 				74CE28162A9A1CB800B24C7B /* SubscribeView.swift in Sources */,
+				745909D52ACAF6DA007392BC /* NotificationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ struct DayPickerView: View {
     @State var changedColor: Color
     @Binding var reminderText: String
     @Binding var isPresentedDay: Bool
-    
+    @State var changeTime = Date()
     var body: some View {
         VStack {
             Text(reminderText)
@@ -28,6 +28,9 @@ struct DayPickerView: View {
                             selectedButtons.removeAll { $0 == day }
                         } else {
                             selectedButtons.append(day)
+                            if selectedButtons.count == days.count {
+                                allSelected = true
+                            }
                         }
                         updateReminderText()
                         
@@ -63,6 +66,9 @@ struct DayPickerView: View {
                 DatePicker("Zaman Seç", selection: $selectedTime, displayedComponents: .hourAndMinute)
                     .labelsHidden()
                     .datePickerStyle(.compact)
+                    .onChange(of: selectedTime) { newValue in
+                        updateReminderText()
+                    }
             }.padding(.horizontal, 17)
             
             
