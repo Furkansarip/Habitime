@@ -23,8 +23,8 @@ struct SubscribeView: View {
                         
                     }
                 VStack {
-                    Text("Habitime Pro'ya yükselt")
-                    Text("Pro modda sınırsız erişim ve gelişim zamanı").font(.system(size: 14))
+                    Text("Upgrade Habitime Pro")
+                    Text("Unlimited access and development time in Pro mode").font(.system(size: 14))
                 }
             }
             }

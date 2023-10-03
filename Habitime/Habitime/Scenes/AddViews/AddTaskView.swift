@@ -50,8 +50,8 @@ struct AddTaskView: View {
                 ScrollView {
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading) {
-                            Text("Alışkanlık").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                            TextField("Başlık Gir", text: $habitTitle)
+                            Text("Title").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
+                            TextField("Habit Title", text: $habitTitle)
                                 .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                 .frame(height: 40)
                                 .background(Color.gray.opacity(0.3).cornerRadius(10))
@@ -60,9 +60,9 @@ struct AddTaskView: View {
                             
                         }//Alışkanlık
                         VStack(alignment: .leading) {
-                            Text("Açıklama").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 16))
+                            Text("Description").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 16))
                             
-                            TextField("Açıklama Ekle", text: $habitDescription)
+                            TextField("Habit Description", text: $habitDescription)
                                 .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                 .frame(height: 40)
                                 .background(Color.gray.opacity(0.3).cornerRadius(10))
@@ -87,8 +87,8 @@ struct AddTaskView: View {
                                     }
                             }//Hedef */
                             VStack(alignment: .leading) {
-                                Text("Hatırlatıcı").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
-                               TextField("Seçim Yapın", text: $reminderText)
+                                Text("Reminder").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
+                               TextField("Choose", text: $reminderText)
                                     .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                     .frame(height: 40)
                                     .lineLimit(1)
@@ -105,7 +105,7 @@ struct AddTaskView: View {
                             }
                         }// Hedef - Hatırlatma
                         VStack {
-                            Text("Renk")
+                            Text("Color")
                         }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                         HStack {
                             
@@ -148,7 +148,7 @@ struct AddTaskView: View {
                         }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))//SEcond
                         HStack {
                             Spacer()
-                            Text("Özel Renk")
+                            Text("Custom Color")
                             ColorPicker("", selection: $selectedColor)
                                 .frame(width: 20)
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 30))
@@ -158,7 +158,7 @@ struct AddTaskView: View {
                         // Özel Renk
                         VStack(alignment: .leading) {
                             
-                            Text("Kategori").padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
+                            Text("Category").padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: 0))
                         }
                         VStack {
                             
@@ -212,25 +212,26 @@ struct AddTaskView: View {
                             }.padding(EdgeInsets(top: 0, leading: paddingValue, bottom: paddingValue, trailing: 0))
                             VStack {
                                 HStack {
-                                    Text("Seçili Icon:")
+                                    Text("Selected Icon:")
                                     Image(systemName: selectedIcon.isEmpty ? "questionmark.circle.fill" : selectedIcon)
                                         .foregroundColor(selectedColor)
                                         .font(.system(size: 16))
                                     
                                 }.padding(EdgeInsets(top: -5, leading: paddingValue, bottom: 13, trailing: 0))
-                                Button("Alışkanlık Ekle") {
+                                Button("Add Habit") {
                                     if habitTitle.isEmpty || habitDescription.isEmpty || reminderText.isEmpty || iconStore.selectedIconName.isEmpty {
                                         showingAlert = true
-                                        self.convertHourAndMin()
-                                        self.daysControl()
-                                        NotificationManager.shared.scheduleNotifications(notificationDays, hour: hour, minute: min)
-                                        notificationDays = []
+                                        
                                     } else {
                                         CoreDataManager.shared.saveHabits(title: habitTitle, description: habitDescription, habitIcon: iconStore.selectedIconName, habitColor: stringColor, habitDate: Date(), context: managedObj)
+                                        self.convertHourAndMin()
+                                        self.daysControl()
+                                        NotificationManager.shared.scheduleNotifications(notificationDays, hour: hour, minute: min, alertTitle: habitTitle)
+                                        notificationDays = []
                                         presentationMode.wrappedValue.dismiss()
                                     }
                                 }.alert(isPresented: $showingAlert) {
-                                    Alert(title: Text("Boş Alan bırakılamaz!"), message: Text("Lütfen gerekli alanları doldurun."), dismissButton: .default(Text("Tamam")))
+                                    Alert(title: Text("Empty Section Error"), message: Text("Please fill requirements area."), dismissButton: .default(Text("OK")))
                                 }
                                 .frame(width: 350, height: 50)
                                 .background(selectedColor)
@@ -279,17 +280,20 @@ struct AddTaskView: View {
     }
     
     func daysControl() {
-        
-        let daysString = reminderText.contains(",") ? reminderText.components(separatedBy: ", ") : reminderText.components(separatedBy: " ")
-        let daysArray = daysString.map { $0.capitalized }
-        for singleDay in daysArray {
-            if Constant.daysDictionary.keys.contains(singleDay) {
-                let value = Constant.daysDictionary[singleDay] ?? 0
-                notificationDays.append(value)
-                print("Notify:", notificationDays)
+        if reminderText.contains("Everyday") {
+            notificationDays = [1,2,3,4,5,6,7]
+        } else {
+            let daysString = reminderText.components(separatedBy: ", ")
+            let daysArray = daysString.map { $0.capitalized }
+            
+            for singleDay in daysArray {
+                if Constant.daysDictionary.keys.contains(singleDay) {
+                    let value = Constant.daysDictionary[singleDay] ?? 0
+                    notificationDays.append(value)
+                    print("Notify:", notificationDays)
+                }
             }
         }
-        
     }
 }
 

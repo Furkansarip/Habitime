@@ -69,9 +69,7 @@ struct TrackerView: View {
                            
                         }.sheet(isPresented: $visiblePicker) {
                             CalendarView(selectedDates: $selectedCalendarDates, selectedHabit: habit)
-                                
-                                
-                               
+                                .presentationDetents([.fraction(0.68)])
                         }
                     
                     Rectangle().frame(width: 35, height: 35)
@@ -91,14 +89,14 @@ struct TrackerView: View {
                             deleteAlertVisible = true
                         }.alert(isPresented: $deleteAlertVisible) {
                             Alert(
-                                title: Text("Silme İşlemi Onayı"),
-                                message: Text("Bu alışkanlığı silmek istediğinize emin misiniz?"),
-                                primaryButton: .default(Text("Evet")) {
+                                title: Text("Do you want to delete?"),
+                                message: Text("Are you sure you want to delete this habit?"),
+                                primaryButton: .default(Text("Yes")) {
                                     deleteObject()
                                     print("Evet düğmesine basıldı.")
                                     deleteAlertVisible = false // Alert'i kapat
                                 },
-                                secondaryButton: .destructive(Text("Hayır")) {
+                                secondaryButton: .destructive(Text("No")) {
                                     // "Hayır" düğmesine basıldığında yapılacak işlem
                                     print("Hayır düğmesine basıldı.")
                                     deleteAlertVisible = false // Alert'i kapat
@@ -119,8 +117,12 @@ struct TrackerView: View {
                             }
                         }.onTapGesture {
                             print("check")
-                            
-                            
+                            let today = Date()
+                            if !selectedCalendarDates.contains(today.getFormattedDate()) {
+                                selectedCalendarDates.append(today.getFormattedDate())
+                                print(selectedCalendarDates)
+                                saveToCoreData(completedDays: selectedCalendarDates)
+                            }
                         }
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 20))
                 }

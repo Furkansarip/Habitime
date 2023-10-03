@@ -84,7 +84,7 @@ struct DayPickerView: View {
             if selectedButtons.isEmpty {
                 reminderText = ""
             } else {
-                reminderText = "\(selectedDaysText) \(selectedTime.getCurrentTime())"
+                reminderText = "\(selectedDaysText), \(selectedTime.getCurrentTime())"
             }
             
         }

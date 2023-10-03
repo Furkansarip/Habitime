@@ -13,14 +13,14 @@ final class NotificationManager {
     
     private init() { }
     
-    func scheduleNotifications(_ notificationDays: [Int], hour: Int, minute: Int) {
+    func scheduleNotifications(_ notificationDays: [Int], hour: Int, minute: Int, alertTitle: String?) {
         let center = UNUserNotificationCenter.current()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
                 for day in notificationDays {
                     let content = UNMutableNotificationContent()
-                    content.title = "Habitime"
-                    content.body = "Bugün önemli bir göreviniz var!"
+                    content.title = alertTitle ?? "Habitime"
+                    content.body = "You have an important mission today!"
                     
                     var dateComponents = DateComponents()
                     dateComponents.timeZone = TimeZone.current

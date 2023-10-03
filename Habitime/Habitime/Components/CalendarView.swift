@@ -51,6 +51,7 @@ struct CalendarView: View {
                 Image(systemName: "xmark.circle").foregroundColor(componentColor)
                     .bold()
                     
+                    
             }))
             .backgroundStyle(.clear)
             

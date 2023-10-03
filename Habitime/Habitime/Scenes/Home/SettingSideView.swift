@@ -11,23 +11,7 @@ struct SettingSideView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Uygulama")) {
-                    NavigationLink(destination: Text("İtem 1 Ayrıntı Sayfası")) {
-                        HStack {
-                            Image(systemName: "gear")
-                            Text("Genel")
-                        }
-                        
-                    }
-                    
-                    NavigationLink(destination: Text("İtem 1 Ayrıntı Sayfası")) {
-                        HStack {
-                            Image(systemName: "paintpalette")
-                            Text("Tema")
-                        }
-                    }
-                    
-                }
+              
                     
                 Section(header: Text("Genel")) {
                     NavigationLink(destination: Text("İtem 1 Ayrıntı Sayfası")) {
@@ -44,12 +28,6 @@ struct SettingSideView: View {
                         }
                     }
                     
-                    NavigationLink(destination: Text("İtem 1 Ayrıntı Sayfası")) {
-                        HStack {
-                            Image(systemName: "paperplane")
-                            Text("Geri bildirim verin")
-                        }
-                    }
                 }
                 
                 Section(header: Text("Abone Ol")) {
