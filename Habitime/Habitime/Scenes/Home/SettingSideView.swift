@@ -28,10 +28,12 @@ struct SettingSideView: View {
                         }
                     }
                     
+                    
+                    
                 }
                 
                 Section(header: Text("Abone Ol")) {
-                    NavigationLink(destination: CategoryButton(buttonTitle: "Test", buttonColor: .constant(.red))) {
+                    NavigationLink(destination: PaywallView()) {
                        SubscribeView()
                     }
                 }

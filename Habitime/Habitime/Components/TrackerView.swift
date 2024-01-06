@@ -70,6 +70,7 @@ struct TrackerView: View {
                         }.sheet(isPresented: $visiblePicker) {
                             CalendarView(selectedDates: $selectedCalendarDates, selectedHabit: habit)
                                 .presentationDetents([.fraction(0.68)])
+                                
                         }
                     
                     Rectangle().frame(width: 35, height: 35)

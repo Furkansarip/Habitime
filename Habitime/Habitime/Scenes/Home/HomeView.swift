@@ -56,8 +56,8 @@ struct HomeView: View {
                 leading: Button {
                     
                 } label: {
-                    NavigationLink(destination:SettingSideView()) {
-                        Image(systemName: "gear").foregroundColor(.pink).bold()
+                    NavigationLink(destination: PaywallView()) {
+                        Image(systemName: "lock").foregroundColor(.pink).bold()
                     }
                 } ,
                 

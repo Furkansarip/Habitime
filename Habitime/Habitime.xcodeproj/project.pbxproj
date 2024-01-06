@@ -10,6 +10,8 @@
 		745909D32AC03FBA007392BC /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909D22AC03FBA007392BC /* EditView.swift */; };
 		745909D52ACAF6DA007392BC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909D42ACAF6DA007392BC /* NotificationManager.swift */; };
 		745909D92ACC3812007392BC /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909D82ACC3812007392BC /* SuccessView.swift */; };
+		745909DC2ACC3E15007392BC /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909DB2ACC3E15007392BC /* PaywallView.swift */; };
+		745909DE2ACC3EEB007392BC /* PaywallComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745909DD2ACC3EEB007392BC /* PaywallComponent.swift */; };
 		74CE27B92A83F90B00B24C7B /* HabitimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */; };
 		74CE27BB2A83F90B00B24C7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CE27BA2A83F90B00B24C7B /* HomeView.swift */; };
 		74CE27BD2A83F90C00B24C7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CE27BC2A83F90C00B24C7B /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 		745909D22AC03FBA007392BC /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		745909D42ACAF6DA007392BC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		745909D82ACC3812007392BC /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		745909DB2ACC3E15007392BC /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		745909DD2ACC3EEB007392BC /* PaywallComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallComponent.swift; sourceTree = "<group>"; };
 		74CE27B52A83F90B00B24C7B /* Habitime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74CE27B82A83F90B00B24C7B /* HabitimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitimeApp.swift; sourceTree = "<group>"; };
 		74CE27BA2A83F90B00B24C7B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -76,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		745909DA2ACC3E08007392BC /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				745909DB2ACC3E15007392BC /* PaywallView.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
 		74CE27AC2A83F90B00B24C7B = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +142,7 @@
 				74DC29582AADE63900681B12 /* CalendarView.swift */,
 				745909D22AC03FBA007392BC /* EditView.swift */,
 				745909D82ACC3812007392BC /* SuccessView.swift */,
+				745909DD2ACC3EEB007392BC /* PaywallComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -137,6 +150,7 @@
 		74CE27D02A878B3600B24C7B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				745909DA2ACC3E08007392BC /* Paywall */,
 				74DC29532AAC802F00681B12 /* Detail */,
 				74CE27E62A90E14900B24C7B /* Home */,
 				74CE27E52A90DE6600B24C7B /* AddViews */,
@@ -277,6 +291,7 @@
 				74CE27ED2A96260500B24C7B /* CoreDataManager.swift in Sources */,
 				74CE27C52A83F90C00B24C7B /* Habitime.xcdatamodeld in Sources */,
 				74DC29592AADE63900681B12 /* CalendarView.swift in Sources */,
+				745909DE2ACC3EEB007392BC /* PaywallComponent.swift in Sources */,
 				74CE27CC2A8425E500B24C7B /* AddTaskView.swift in Sources */,
 				74CE27E82A90F96700B24C7B /* IconPickerView.swift in Sources */,
 				74CE27CF2A85458900B24C7B /* ColorButton.swift in Sources */,
@@ -284,6 +299,7 @@
 				74CE27D82A8AA30C00B24C7B /* CustomTextField.swift in Sources */,
 				74CE27DC2A8D49C900B24C7B /* DayPickerView.swift in Sources */,
 				745909D92ACC3812007392BC /* SuccessView.swift in Sources */,
+				745909DC2ACC3E15007392BC /* PaywallView.swift in Sources */,
 				74CE27D42A89401400B24C7B /* GoalPickerView.swift in Sources */,
 				74DC29572AACADB500681B12 /* DayGridCell.swift in Sources */,
 				74CE27D22A878CE700B24C7B /* CategoryButton.swift in Sources */,
@@ -433,7 +449,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.furkansarip.Habitime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -467,7 +483,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.furkansarip.Habitime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -11,6 +11,7 @@ import SwiftUI
 struct HabitimeApp: App {
     let dataManager = CoreDataManager.shared
     let iconStore = IconStore()
+    @AppStorage("themeMode") var themeMode: String = "light"
     @StateObject private var sharedData = HabitData()
     var body: some Scene {
         WindowGroup {
