@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IconPickerView: View {
     @State var selectedIcon: Constant.IconSet
-    @State var selectedColor: Color = .red
+    @State var selectedColor: Color = .indigo
     @State var iconSet = [String]()
     @Binding var isPresented: Bool
     var body: some View {
@@ -30,18 +30,17 @@ struct IconPickerView: View {
     func drawIconSet() {
         switch selectedIcon {
         case .sport:
-            iconSet = ["figure.walk", "figure.outdoor.cycle", "figure.strengthtraining.traditional"]
+            iconSet = ["figure.walk", "figure.run", "bicycle.circle", "figure.strengthtraining.traditional", "figure.strengthtraining.functional", "figure.cooldown", "figure.martial.arts", "figure.mind.and.body", "figure.pilates", "basketball.fill", "water.waves", "volleyball.fill", "dumbbell.fill", "figure.yoga", "figure.hunting"]
         case .food:
-            iconSet = ["leaf.fill", "heart.fill", "star.fill", "bolt.fill", "cloud.fill", "moon.fill", "sun.min.fill", "bicycle", "figure.walk", "figure.outdoor.cycle", "figure.strengthtraining.traditional", "gamecontroller", "arrowtriangle.right.circle", "network", "camera"]
+            iconSet = ["leaf.fill", "fork.knife", "cup.and.saucer.fill", "cart.fill", "flame.fill", "wineglass.fill", "waterbottle.fill", "carrot.fill", "fish.fill", "waterbottle"]
         case .activity:
-            iconSet = ["gamecontroller", "arrowtriangle.right.circle", "network", "camera"]
+            iconSet = ["gamecontroller.fill", "arrowtriangle.right.circle.fill", "network", "camera.fill", "sailboat", "cursorarrow.motionlines", "map", "mappin.and.ellipse", "door.right.hand.closed", "party.popper.fill"]
         case .art:
-            iconSet = ["music.quarternote.3", "house", "lightbulb", "paintpalette"]
+            iconSet = ["music.note", "paintpalette.fill", "lightbulb.fill", "pencil.and.outline", "figure.martial.arts", "music.mic.circle", "scissors.circle", "wand.and.stars", "wallet.pass", "hammer.circle"]
         case .money:
-            iconSet = ["dollarsign", "clock", "hourglass", "bag"]
+            iconSet = ["dollarsign.circle", "creditcard", "banknote", "chart.bar", "laptopcomputer", "hourglass.bottomhalf.filled", "swiftdata", "movieclapper", "brain.filled.head.profile", "sunglasses"]
         case .other:
-            iconSet = ["pencil", "list.bullet", "airplane", "car"]
-            
+            iconSet = ["airplane", "car.fill", "network", "engine.combustion", "shield.lefthalf.filled", "checkmark.circle", "person.slash", "figure.pool.swim", "globe.europe.africa", "tornado"]
         }
     }
 }
@@ -49,6 +48,6 @@ struct IconPickerView: View {
 
 struct IconPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        IconPickerView(selectedIcon: .food, isPresented: .constant(true))
+        IconPickerView(selectedIcon: .other, isPresented: .constant(true))
     }
 }

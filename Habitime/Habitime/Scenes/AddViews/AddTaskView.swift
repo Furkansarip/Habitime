@@ -42,7 +42,7 @@ struct AddTaskView: View {
     var firstCategorySet: [String] = Constant.firstCategorySet
     var secondCategorySet: [String] = Constant.secondCategorySet
     var paddingValue: CGFloat = 22
-    
+    @Environment(\.colorScheme) var theme
     var body: some View {
         
         NavigationStack {
@@ -89,11 +89,15 @@ struct AddTaskView: View {
                             VStack(alignment: .leading) {
                                 Text("Reminder").padding(EdgeInsets(top: 8, leading: paddingValue, bottom: 0, trailing: 0))
                                TextField("Choose", text: $reminderText)
+                                    .disabled(true)
                                     .padding(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 0))
                                     .frame(height: 40)
                                     .lineLimit(1)
                                     .background(Color.gray.opacity(0.2).cornerRadius(10))
                                     .padding(EdgeInsets(top: 0, leading: paddingValue, bottom: 0, trailing: paddingValue))
+                                    .onChange(of: dayPickerPresented, perform: { value in
+                                            hideKeyboard()
+                                    })
                                     .onTapGesture {
                                         dayPickerPresented = true
                                         
@@ -101,6 +105,7 @@ struct AddTaskView: View {
                                         DayPickerView(changedColor: selectedColor, reminderText: $reminderText, isPresentedDay: $dayPickerPresented).presentationDetents([.fraction(0.35)])
                                             .presentationDragIndicator(.visible)
                                     }
+                                    
                                 
                             }
                         }// Hedef - Hatırlatma
@@ -122,7 +127,7 @@ struct AddTaskView: View {
                                 } label: {
                                     ColorButton(singleColor: color).overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 4).padding(-4)
+                                            .stroke(selectedColor == color ? decideColor() : Color.clear, lineWidth: 4).padding(-4).shadow(radius: 10)
                                     )
                                 }
                             }
@@ -141,7 +146,7 @@ struct AddTaskView: View {
                                 } label: {
                                     ColorButton(singleColor: color).overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(selectedColor == color ? Color.black.opacity(0.4) : Color.clear, lineWidth: 3).padding(-4)
+                                            .stroke(selectedColor == color ? decideColor() : Color.clear, lineWidth: 4).padding(-4).shadow(radius: 10)
                                     )
                                 }
                             }
@@ -249,13 +254,19 @@ struct AddTaskView: View {
             }
             
             
-        }.toolbar {
+        }
+        
+        .toolbar {
             ToolbarItem(placement: .principal) {
                 Image("logo")
             }
             
         }
         .offset()
+    }
+    
+    func decideColor() -> Color {
+        return theme == .dark ? Color.white : Color.black.opacity(0.8)
     }
     
     func convertHourAndMin() {

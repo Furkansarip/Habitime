@@ -14,12 +14,16 @@ struct HomeView: View {
     @State var completed = [Int]()
     @State var detailStatus: Bool = false
     @State var detail: FetchedResults<Habits>.Element?
-   
+    @State var emptyHabitText = """
+                             You're here to make your life more organized, productive, and balanced. Our habits shape who we are and who we will become. This app is your guide to achieving big goals with small steps every day.
+                             
+                             This app helps you set your goals, track your progress, and build habits that last. Success is the result of small, consistent actions, and we're here to support you on your journey.
+                             """
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
-            VStack() {
+            VStack {
                 if habits.count > 0 {
-                    
                     ZStack {
                         List(habits) { habit in
                             Section {
@@ -35,15 +39,17 @@ struct HomeView: View {
                         .listStyle(.insetGrouped)
                         
                     }
-                }
-                
-                else {
-                    Image("man")
-                    NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
-                        Image("plus2").frame(width: 40, height: 40).border(.gray, width: 2).foregroundColor(.pink).background(Color.gray.opacity(0.7)).cornerRadius(10)
+                } else {
+                    VStack {
+                        Image("man")
+                            .background(colorScheme == .dark ? Color.white : nil)
+                        Text(emptyHabitText).padding()
+                        .font(.title3)
+                        NavigationLink(destination: AddTaskView(goalText: "", reminderText: "")) {
+                            Text("Add a Habit")
+                        }.buttonStyle(.bordered)
+                            .foregroundStyle(.pink)
                     }
-                    Text("Habit not found click + button")
-                    Text("Add New Habit").font(.callout)
                 }
             }
             .toolbar {
@@ -53,34 +59,27 @@ struct HomeView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
-                leading: Button {
-                    
-                } label: {
-                    NavigationLink(destination: PaywallView()) {
-                        Image(systemName: "lock").foregroundColor(.pink).bold()
-                    }
-                } ,
-                
-                trailing: Button {
-                    /* removeAllObject() */
-                    
-                } label: {
+                trailing: Button {} label: {
                   NavigationLink(destination:AddTaskView(goalText: "", reminderText: "")) {
                     Image(systemName: "plus").foregroundColor(.pink).bold()
                     }
-                   // Image(systemName: "plus").foregroundColor(.pink).bold()
                 })
             
+        }.onAppear {
+            oldHabitsRemove()
         }
     }
     
-    func removeAllObject() {
-        for item in habits {
+    func oldHabitsRemove() {
+        let thisYear = Calendar.current.component(.year, from: Date())
+        let habitYears = habits.filter { $0.habitDate?.year() ?? 0 < thisYear }
+        guard !habitYears.isEmpty else { return }
+        for item in habitYears {
             managedObject.delete(item)
         }
+        emptyHabitText = "New year, new goals, a new journey—are you ready? Revisit your old habits and create new ones!\nRemember, discipline is a stronger energy than motivation."
         try? managedObject.save()
     }
-    
 }
 
 struct HomeView_Previews: PreviewProvider {

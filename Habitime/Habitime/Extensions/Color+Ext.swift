@@ -42,3 +42,9 @@ extension Color {
             return Color(red: red, green: green, blue: blue)
         }
 }
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}

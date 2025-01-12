@@ -22,4 +22,11 @@ struct HabitimeApp: App {
             /*TrackerView() */
         }
     }
+    
+    func yearCheck() {
+        let todayYear = Calendar.current.component(.year, from: Date()) // Örnek: 2025
+        let nextYear = todayYear + 1
+        print("Today", todayYear)
+        print("Next Year", nextYear)
+    }
 }

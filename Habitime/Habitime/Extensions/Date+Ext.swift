@@ -20,4 +20,9 @@ extension Date {
         dateFormatter.dateFormat = "dd.MM.yyyy" // İstediğiniz tarih formatını burada belirtin
         return dateFormatter.string(from: self)
     }
+    
+    func year() -> Int {
+        let calendar = Calendar.current
+        return calendar.component(.year, from: self)
+    }
 }

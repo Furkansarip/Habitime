@@ -12,12 +12,14 @@ struct IconView: View {
     @EnvironmentObject var selectedIcon: IconStore
     @State var iconColor: Color = .indigo
     @Binding var isSelectedIcon: Bool
+    @Environment(\.colorScheme) var theme
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(.gray.opacity(0.7))
+                .foregroundColor(iconColor)
                 .frame(width: 48, height: 36)
                 .cornerRadius(5)
+                .shadow(radius: 4)
             
             Button {
                 print(iconName)
@@ -26,9 +28,8 @@ struct IconView: View {
             } label: {
                 Image(systemName: iconName)
                     .font(.system(size: 22))
-                    .foregroundColor(iconColor)
+                    .foregroundColor(.white)
             }
-
         }
     }
 }
